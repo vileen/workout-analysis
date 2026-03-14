@@ -1,11 +1,11 @@
-import { Pose, FormAnalysis, RepState, POSE_LANDMARKS } from '../types/pose';
+import type { Pose, FormAnalysis, RepState } from '../types/pose';
+import { POSE_LANDMARKS } from '../types/pose';
 import { 
   calculateKneeAngle, 
   calculateTorsoAngle, 
   getAverage, 
   checkSymmetry,
   areAllVisible,
-  calculateJointAngle,
 } from '../utils/math';
 
 // Goblet squat criteria

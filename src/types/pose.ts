@@ -51,7 +51,17 @@ export const POSE_LANDMARKS = {
 } as const;
 
 // Exercise types
-export type ExerciseType = 'squat' | 'pushup' | 'plank' | 'lunge' | 'deadlift';
+export type ExerciseType = 
+  | 'squat' 
+  | 'pushup' 
+  | 'plank' 
+  | 'lunge' 
+  | 'deadlift'
+  | 'kettle-goblet-squat'
+  | 'kettle-swing'
+  | 'kettle-row'
+  | 'kettle-press'
+  | 'russian-twist';
 
 export interface Exercise {
   id: ExerciseType;
@@ -59,6 +69,15 @@ export interface Exercise {
   namePl: string;
   description: string;
   difficulty: 'beginner' | 'intermediate' | 'advanced';
+}
+
+// Exercise instructions
+export interface ExerciseInstructions {
+  setup: string[];
+  execution: string[];
+  commonMistakes: string[];
+  tips: string[];
+  muscles: string[];
 }
 
 // Rep state for exercise tracking

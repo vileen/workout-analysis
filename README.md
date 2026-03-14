@@ -1,73 +1,90 @@
-# React + TypeScript + Vite
+# Form Analyzer - Analiza Formy Treningowej
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Deploy to GitHub Pages](https://github.com/vileen/workout-analysis/actions/workflows/deploy.yml/badge.svg)](https://github.com/vileen/workout-analysis/actions/workflows/deploy.yml)
 
-Currently, two official plugins are available:
+Aplikacja do analizy formy ćwiczeń w czasie rzeczywistym z wykorzystaniem AI (MediaPipe Pose). Uruchamia się na iPhone jako PWA (Progressive Web App).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Live Demo
 
-## React Compiler
+**GitHub Pages:** https://vileen.github.io/workout-analysis/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📱 Jak używać
 
-## Expanding the ESLint configuration
+1. Otwórz link na iPhone w Safari
+2. Kliknij "Share" → "Add to Home Screen"
+3. Uruchom aplikację z ekranu głównego
+4. Ustaw iPhone na statywie 2-3 metry przed Tobą
+5. Wybierz ćwiczenie i rozpocznij trening
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🏋️ Wspierane ćwiczenia
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Ćwiczenie | Poziom | Co analizuje |
+|-----------|--------|--------------|
+| **Kettle Goblet Squat** | Początkujący | Głębokość, kąt tułowia, symetria kolan |
+| **Kettle Swing** | Średni | Hip hinge, proste ramiona, zgięcie kolan |
+| **Kettle Row** | Początkujący | Pochylenie tułowia, zakres łokcia, proste plecy |
+| **Kettle Press** | Średni | Pionowy tułów, stabilność bioder, blokada |
+| **Russian Twist** | Początkujący | Odchylenie tułowia, rotacja, równe barki |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ✨ Funkcje
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Analiza w czasie rzeczywistym** - MediaPipe działa lokalnie na urządzeniu
+- **Feedback wizualny** - Szkielet z kolorowymi wskazówkami
+- **Feedback audio** - Głosowe komendy (wkrótce)
+- **Liczenie powtórzeń** - Automatyczne wykrywanie
+- **Ocena formy** - Score 0-100 dla każdego repa
+- **Wibracje** - Haptic feedback po każdym powtórzeniu
+- **Instrukcje** - Szczegółowe wskazówki dla każdego ćwiczenia
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React + TypeScript + Vite
+- **Pose Detection:** MediaPipe Pose (on-device)
+- **Styling:** TailwindCSS
+- **State:** Zustand
+- **Deploy:** GitHub Pages
+
+## 🔧 Development
+
+```bash
+# Clone repo
+git clone https://github.com/vileen/workout-analysis.git
+cd workout-analysis
+
+# Install dependencies
+npm install
+
+# Run dev server
+npm run dev
+
+# Build for production
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📋 Wymagania
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- iPhone z iOS 14+ (lub Android z Chrome)
+- Dostęp do kamery
+- Statyw lub uchwyt na telefon
+- Dobra iluminacja (działa najlepiej w świetle dziennym)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📝 Roadmap
+
+- [x] Podstawowa analiza 5 ćwiczeń kettlebell
+- [x] Liczenie powtórzeń dla wszystkich ćwiczeń
+- [x] Feedback wizualny (szkielet)
+- [x] Instrukcje dla każdego ćwiczenia
+- [ ] Audio feedback (głosowe komendy)
+- [ ] Historia treningów
+- [ ] Statystyki i wykresy postępów
+- [ ] Więcej ćwiczeń (pompki, plank, wykroki)
+- [ ] Kalibracja kamery do wzrostu
+- [ ] Export do Apple Health
+
+## 🤝 Wsparcie
+
+Aplikacja działa lokalnie na urządzeniu - twoje dane nie opuszczają telefonu. MediaPipe procesuje obraz w czasie rzeczywistym bez wysyłania go do chmury.
+
+---
+
+Stworzone z 💪 dla pasjonatów kettlebell

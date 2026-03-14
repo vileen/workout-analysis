@@ -1,26 +1,12 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { Pose, Landmark } from '../types/pose';
+import type { Pose } from '../types/pose';
 
-// MediaPipe types (will be imported dynamically)
-type PoseLandmarker = {
-  setOptions: (options: unknown) => void;
-  detectForVideo: (video: HTMLVideoElement, timestamp: number) => {
-    landmarks: Landmark[][];
-    worldLandmarks: Landmark[][];
-  };
-  close: () => void;
-};
-
-type FilesetResolver = {
-  forVisionTasks: (path: string) => Promise<unknown>;
-};
-
-type PoseLandmarkerClass = {
-  createFromOptions: (
-    filesetResolver: unknown,
-    options: unknown
-  ) => Promise<PoseLandmarker>;
-};
+// MediaPipe globals
+declare global {
+  interface Window {
+    Pose: any;
+  }
+}
 
 interface UseMediaPipeOptions {
   onResults: (pose: Pose) => void;
@@ -40,31 +26,43 @@ export function useMediaPipe(options: UseMediaPipeOptions): UseMediaPipeReturn {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
-  const poseRef = useRef<PoseLandmarker | null>(null);
-  const lastVideoTimeRef = useRef(-1);
+  const poseRef = useRef<any>(null);
 
   const initialize = useCallback(async () => {
     try {
       setError(null);
       
-      // Dynamic import for MediaPipe (browser-only)
-      const vision = await import('@mediapipe/tasks-vision');
-      const { PoseLandmarker, FilesetResolver } = vision as {
-        PoseLandmarker: PoseLandmarkerClass;
-        FilesetResolver: FilesetResolver;
-      };
+      // Wait for MediaPipe to load
+      while (!window.Pose) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
       
-      const filesetResolver = await FilesetResolver.forVisionTasks(
-        'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm'
-      );
+      const pose = new window.Pose({
+        locateFile: (file: string) => {
+          return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
+        }
+      });
       
-      const pose = await PoseLandmarker.createFromOptions(filesetResolver, {
-        baseOptions: {
-          modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task',
-          delegate: 'GPU',
-        },
-        runningMode: 'VIDEO',
-        numPoses: 1,
+      pose.setOptions({
+        modelComplexity: 1,
+        smoothLandmarks: true,
+        enableSegmentation: false,
+        minDetectionConfidence: 0.5,
+        minTrackingConfidence: 0.5,
+      });
+      
+      pose.onResults((results: any) => {
+        if (results.poseLandmarks) {
+          const appPose: Pose = {
+            landmarks: results.poseLandmarks.map((lm: any) => ({
+              x: lm.x,
+              y: lm.y,
+              z: lm.z,
+              visibility: lm.visibility,
+            })),
+          };
+          options.onResults(appPose);
+        }
       });
       
       poseRef.current = pose;
@@ -77,35 +75,21 @@ export function useMediaPipe(options: UseMediaPipeOptions): UseMediaPipeReturn {
   }, [options]);
 
   const processFrame = useCallback(async (video: HTMLVideoElement) => {
-    if (!poseRef.current || video.currentTime === lastVideoTimeRef.current) {
-      return;
-    }
+    if (!poseRef.current) return;
     
-    lastVideoTimeRef.current = video.currentTime;
     setIsProcessing(true);
-    
     try {
-      const results = poseRef.current.detectForVideo(video, performance.now());
-      
-      if (results.landmarks && results.landmarks.length > 0) {
-        const pose: Pose = {
-          landmarks: results.landmarks[0],
-          worldLandmarks: results.worldLandmarks?.[0],
-        };
-        options.onResults(pose);
-      }
+      await poseRef.current.send({ image: video });
     } catch (err) {
       console.error('Error processing frame:', err);
     } finally {
       setIsProcessing(false);
     }
-  }, [options]);
+  }, []);
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       poseRef.current?.close();
-      poseRef.current = null;
     };
   }, []);
 

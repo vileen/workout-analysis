@@ -1,4 +1,5 @@
-import { Landmark, POSE_LANDMARKS } from '../types/pose';
+import type { Landmark } from '../types/pose';
+import { POSE_LANDMARKS } from '../types/pose';
 
 /**
  * Calculate angle between three points (in degrees)

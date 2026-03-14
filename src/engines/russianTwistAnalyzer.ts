@@ -1,4 +1,5 @@
-import { Pose, FormAnalysis, RepState, POSE_LANDMARKS } from '../types/pose';
+import type { Pose, FormAnalysis, RepState } from '../types/pose';
+import { POSE_LANDMARKS } from '../types/pose';
 import { 
   calculateJointAngle,
   areAllVisible,
@@ -41,10 +42,6 @@ export function analyzeRussianTwist(pose: Pose): FormAnalysis {
       details: {},
     };
   }
-  
-  // Calculate torso lean (angle between hips and shoulders relative to vertical)
-  const shoulderY = (landmarks[POSE_LANDMARKS.LEFT_SHOULDER].y + landmarks[POSE_LANDMARKS.RIGHT_SHOULDER].y) / 2;
-  const hipY = (landmarks[POSE_LANDMARKS.LEFT_HIP].y + landmarks[POSE_LANDMARKS.RIGHT_HIP].y) / 2;
   
   // Calculate rotation (difference in shoulder X positions)
   const shoulderRotation = Math.abs(

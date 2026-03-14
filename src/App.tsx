@@ -1,23 +1,15 @@
 import { useState } from 'react';
 import { ExerciseSelector } from './components/Exercise/ExerciseSelector';
 import { ExerciseView } from './components/Exercise/ExerciseView';
-import { Exercise } from './types/pose';
+import type { Exercise } from './types/pose';
 import './App.css';
 
 type AppView = 'selector' | 'exercise' | 'summary';
-
-interface WorkoutResult {
-  exercise: Exercise;
-  reps: number;
-  avgFormScore: number;
-  duration: number;
-}
 
 function App() {
   const [view, setView] = useState<AppView>('selector');
   const [currentExercise, setCurrentExercise] = useState<Exercise | null>(null);
   const [targetReps, setTargetReps] = useState(10);
-  const [result, setResult] = useState<WorkoutResult | null>(null);
 
   const handleExerciseSelect = (exercise: Exercise, reps: number) => {
     setCurrentExercise(exercise);

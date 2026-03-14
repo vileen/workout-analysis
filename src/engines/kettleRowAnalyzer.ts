@@ -1,4 +1,5 @@
-import { Pose, FormAnalysis, RepState, POSE_LANDMARKS } from '../types/pose';
+import type { Pose, FormAnalysis, RepState } from '../types/pose';
+import { POSE_LANDMARKS } from '../types/pose';
 import { 
   calculateJointAngle,
   calculateTorsoAngle, 
@@ -183,10 +184,6 @@ export function detectKettleRowRep(
   }
   
   return { newState, repCompleted: false };
-}
-
-function getAverage(a: number, b: number): number {
-  return (a + b) / 2;
 }
 
 export function getInitialKettleRowState(): KettleRowState {

@@ -1,10 +1,19 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
-import { useMediaPipe } from '../../hooks/useMediaPipe';
-import { Pose } from '../../types/pose';
-import { PoseLandmarker, FilesetResolver, DrawingUtils } from '@mediapipe/tasks-vision';
+import { useRef, useEffect, useState } from 'react';
+import type { Pose as AppPose } from '../../types/pose';
+
+// MediaPipe globals
+declare global {
+  interface Window {
+    Pose: any;
+    Camera: any;
+    drawConnectors: any;
+    drawLandmarks: any;
+    POSE_CONNECTIONS: any;
+  }
+}
 
 interface CameraFeedProps {
-  onPoseDetected: (pose: Pose) => void;
+  onPoseDetected: (pose: AppPose) => void;
   isActive: boolean;
   showSkeleton?: boolean;
 }
@@ -14,137 +23,125 @@ export function CameraFeed({ onPoseDetected, isActive, showSkeleton = true }: Ca
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const poseRef = useRef<PoseLandmarker | null>(null);
-  const animationRef = useRef<number>();
-  const lastVideoTimeRef = useRef(-1);
+  const poseRef = useRef<any>(null);
+  const cameraRef = useRef<any>(null);
 
-  // Initialize MediaPipe
+  // Load MediaPipe scripts
   useEffect(() => {
-    const initializePose = async () => {
-      try {
-        const vision = await FilesetResolver.forVisionTasks(
-          'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm'
-        );
-        
-        const pose = await PoseLandmarker.createFromOptions(vision, {
-          baseOptions: {
-            modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task',
-            delegate: 'GPU',
-          },
-          runningMode: 'VIDEO',
-          numPoses: 1,
-        });
-        
-        poseRef.current = pose;
-        setIsLoading(false);
-      } catch (err) {
-        setError('Nie udało się załadować MediaPipe. Spróbuj odświeżyć stronę.');
-        setIsLoading(false);
-      }
-    };
-
-    initializePose();
-
-    return () => {
-      poseRef.current?.close();
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, []);
-
-  // Start camera
-  useEffect(() => {
-    const startCamera = async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: {
-            facingMode: 'environment',
-            width: { ideal: 1280 },
-            height: { ideal: 720 },
-          },
-          audio: false,
-        });
-        
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
+    const loadScripts = async () => {
+      const scripts = [
+        'https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js',
+        'https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js',
+        'https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js',
+      ];
+      
+      for (const src of scripts) {
+        if (!document.querySelector(`script[src="${src}"]`)) {
+          const script = document.createElement('script');
+          script.src = src;
+          script.crossOrigin = 'anonymous';
+          await new Promise((resolve, reject) => {
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+          });
         }
-      } catch (err) {
-        setError('Brak dostępu do kamery. Upewnij się, że dałeś pozwolenie.');
       }
+      
+      setIsLoading(false);
     };
-
-    startCamera();
-
-    return () => {
-      const stream = videoRef.current?.srcObject as MediaStream;
-      stream?.getTracks().forEach(track => track.stop());
-    };
+    
+    loadScripts().catch(() => {
+      setError('Nie udało się załadować MediaPipe');
+      setIsLoading(false);
+    });
   }, []);
 
-  // Process frames
-  const processFrame = useCallback(() => {
-    const video = videoRef.current;
-    const canvas = canvasRef.current;
-    const pose = poseRef.current;
+  // Initialize pose detection
+  useEffect(() => {
+    if (isLoading || !window.Pose || !videoRef.current) return;
     
-    if (!video || !canvas || !pose || video.paused || video.ended) {
-      animationRef.current = requestAnimationFrame(processFrame);
-      return;
-    }
-
-    if (video.currentTime !== lastVideoTimeRef.current) {
-      lastVideoTimeRef.current = video.currentTime;
-      
-      const results = pose.detectForVideo(video, performance.now());
-      
-      if (results.landmarks && results.landmarks.length > 0) {
-        const landmarks = results.landmarks[0];
+    const pose = new window.Pose({
+      locateFile: (file: string) => {
+        return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
+      }
+    });
+    
+    pose.setOptions({
+      modelComplexity: 1,
+      smoothLandmarks: true,
+      enableSegmentation: false,
+      minDetectionConfidence: 0.5,
+      minTrackingConfidence: 0.5,
+    });
+    
+    pose.onResults((results: any) => {
+      if (results.poseLandmarks) {
+        const appPose: AppPose = {
+          landmarks: results.poseLandmarks.map((lm: any) => ({
+            x: lm.x,
+            y: lm.y,
+            z: lm.z,
+            visibility: lm.visibility,
+          })),
+        };
         
-        onPoseDetected({
-          landmarks,
-          worldLandmarks: results.worldLandmarks?.[0],
-        });
+        onPoseDetected(appPose);
         
         // Draw skeleton
-        if (showSkeleton) {
+        if (showSkeleton && canvasRef.current && window.drawConnectors) {
+          const canvas = canvasRef.current;
           const ctx = canvas.getContext('2d');
-          if (ctx) {
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+          if (ctx && videoRef.current) {
+            canvas.width = videoRef.current.videoWidth;
+            canvas.height = videoRef.current.videoHeight;
             
-            const drawingUtils = new DrawingUtils(ctx);
-            drawingUtils.drawLandmarks(landmarks, {
-              radius: 4,
-              color: '#00FF00',
-            });
-            drawingUtils.drawConnectors(landmarks, PoseLandmarker.POSE_CONNECTIONS, {
+            ctx.save();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.scale(-1, 1);
+            ctx.translate(-canvas.width, 0);
+            
+            window.drawConnectors(ctx, results.poseLandmarks, window.POSE_CONNECTIONS, {
               color: '#00FF00',
               lineWidth: 2,
             });
+            window.drawLandmarks(ctx, results.poseLandmarks, {
+              color: '#00FF00',
+              lineWidth: 1,
+              radius: 3,
+            });
+            
+            ctx.restore();
           }
         }
       }
-    }
+    });
     
-    animationRef.current = requestAnimationFrame(processFrame);
-  }, [onPoseDetected, showSkeleton]);
-
-  // Start/stop frame processing
-  useEffect(() => {
-    if (isActive && !isLoading) {
-      animationRef.current = requestAnimationFrame(processFrame);
-    } else if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
+    poseRef.current = pose;
+    
+    // Start camera
+    if (window.Camera) {
+      const camera = new window.Camera(videoRef.current, {
+        onFrame: async () => {
+          if (isActive && poseRef.current) {
+            await poseRef.current.send({ image: videoRef.current });
+          }
+        },
+        width: 1280,
+        height: 720,
+      });
+      
+      cameraRef.current = camera;
+      camera.start().catch(() => {
+        setError('Brak dostępu do kamery');
+      });
     }
     
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      pose.close();
+      cameraRef.current?.stop();
     };
-  }, [isActive, isLoading, processFrame]);
+  }, [isLoading, isActive, onPoseDetected, showSkeleton]);
 
   if (error) {
     return (
@@ -165,15 +162,14 @@ export function CameraFeed({ onPoseDetected, isActive, showSkeleton = true }: Ca
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover"
-        autoPlay
+        style={{ transform: 'scaleX(-1)' }}
         playsInline
-        muted
       />
       
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full object-cover"
-        style={{ transform: 'scaleX(-1)' }} // Mirror effect
+        style={{ transform: 'scaleX(-1)' }}
       />
       
       {/* Overlay instructions */}

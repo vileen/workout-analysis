@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Exercise, ExerciseType, WorkoutSession, Rep } from '../types/pose';
+import type { Exercise, WorkoutSession, Rep } from '../types/pose';
 
 interface WorkoutStore {
   // Current session

@@ -1,4 +1,5 @@
-import { Pose, FormAnalysis, RepState, POSE_LANDMARKS } from '../types/pose';
+import type { Pose, FormAnalysis, RepState } from '../types/pose';
+import { POSE_LANDMARKS } from '../types/pose';
 import { 
   calculateJointAngle,
   calculateTorsoAngle, 

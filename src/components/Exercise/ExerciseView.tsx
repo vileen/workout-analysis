@@ -1,16 +1,22 @@
 import { useState, useCallback, useEffect } from 'react';
 import { CameraFeed } from '../Camera/CameraFeed';
-import { Pose, Rep } from '../../types/pose';
+import type { Pose, Rep } from '../../types/pose';
 import { useWorkoutStore } from '../../stores/workoutStore';
 import { getExerciseById } from '../../data/exercises';
 
 // Import all analyzers
-import { analyzeSquat, detectSquatRep, getInitialSquatState, SquatState } from '../../engines/squatAnalyzer';
-import { analyzeGobletSquat, detectGobletSquatRep, getInitialGobletSquatState, GobletSquatState } from '../../engines/gobletSquatAnalyzer';
-import { analyzeKettleSwing, detectKettleSwingRep, getInitialKettleSwingState, KettleSwingState } from '../../engines/kettleSwingAnalyzer';
-import { analyzeKettleRow, detectKettleRowRep, getInitialKettleRowState, KettleRowState } from '../../engines/kettleRowAnalyzer';
-import { analyzeKettlePress, detectKettlePressRep, getInitialKettlePressState, KettlePressState } from '../../engines/kettlePressAnalyzer';
-import { analyzeRussianTwist, detectRussianTwistRep, getInitialRussianTwistState, RussianTwistState } from '../../engines/russianTwistAnalyzer';
+import { analyzeSquat, detectSquatRep, getInitialSquatState } from '../../engines/squatAnalyzer';
+import type { SquatState } from '../../engines/squatAnalyzer';
+import { analyzeGobletSquat, detectGobletSquatRep, getInitialGobletSquatState } from '../../engines/gobletSquatAnalyzer';
+import type { GobletSquatState } from '../../engines/gobletSquatAnalyzer';
+import { analyzeKettleSwing, detectKettleSwingRep, getInitialKettleSwingState } from '../../engines/kettleSwingAnalyzer';
+import type { KettleSwingState } from '../../engines/kettleSwingAnalyzer';
+import { analyzeKettleRow, detectKettleRowRep, getInitialKettleRowState } from '../../engines/kettleRowAnalyzer';
+import type { KettleRowState } from '../../engines/kettleRowAnalyzer';
+import { analyzeKettlePress, detectKettlePressRep, getInitialKettlePressState } from '../../engines/kettlePressAnalyzer';
+import type { KettlePressState } from '../../engines/kettlePressAnalyzer';
+import { analyzeRussianTwist, detectRussianTwistRep, getInitialRussianTwistState } from '../../engines/russianTwistAnalyzer';
+import type { RussianTwistState } from '../../engines/russianTwistAnalyzer';
 
 interface ExerciseViewProps {
   exerciseId: string;
