@@ -3,17 +3,68 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="manifest" href="/workout-analysis/manifest.json" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="theme-color" content="#111827" />
+    <meta name="background-color" content="#111827" />
+    
+    <!-- iOS PWA Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Form Analyzer" />
+    
+    <!-- iOS Icons -->
+    <link rel="apple-touch-icon" href="/workout-analysis/icon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/workout-analysis/icon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/workout-analysis/icon-512x512.png" />
+    
+    <!-- Cache Control for iOS -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    
+    <!-- Description -->
     <meta name="description" content="Analiza formy w czasie rzeczywistym podczas treningu" />
+    
     <title>Form Analyzer</title>
+    
+    <style>
+      /* Prevent FOUC (Flash of Unstyled Content) */
+      html {
+        background-color: #111827;
+      }
+      body {
+        background-color: #111827;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Service Worker Registration Fallback -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        // Check for updates every 5 minutes
+        setInterval(() => {
+          navigator.serviceWorker.ready.then((registration) => {
+            registration.update();
+          });
+        }, 5 * 60 * 1000);
+        
+        // Also check on page visibility change (when user returns to app)
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'visible') {
+            navigator.serviceWorker.ready.then((registration) => {
+              registration.update();
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>
