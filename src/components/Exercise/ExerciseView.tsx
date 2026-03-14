@@ -3,6 +3,7 @@ import { CameraFeed } from '../Camera/CameraFeed';
 import type { Pose, Rep } from '../../types/pose';
 import { useWorkoutStore } from '../../stores/workoutStore';
 import { getExerciseById } from '../../data/exercises';
+import { audioFeedback } from '../../utils/audioFeedback';
 
 // Import all analyzers
 import { analyzeSquat, detectSquatRep, getInitialSquatState } from '../../engines/squatAnalyzer';
@@ -30,6 +31,7 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
   const exercise = getExerciseById(exerciseId as any);
   const [exerciseState, setExerciseState] = useState<ExerciseState | null>(null);
   const [lastRepTime, setLastRepTime] = useState<number>(0);
+  const [audioEnabled, setAudioEnabled] = useState(true);
   
   const { 
     isActive, 
@@ -71,10 +73,16 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
     
     startExercise(exercise, targetReps);
     
+    // Initialize audio
+    if (audioEnabled) {
+      audioFeedback.enable();
+      setTimeout(() => audioFeedback.speak('Start!', 'high'), 500);
+    }
+    
     return () => {
       endExercise();
     };
-  }, [exercise, targetReps, startExercise, endExercise]);
+  }, [exercise, targetReps, startExercise, endExercise, audioEnabled]);
 
   // Handle pose detection based on exercise type
   const handlePoseDetected = useCallback((pose: Pose) => {
@@ -118,6 +126,7 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
     updateFormFeedback(formAnalysis.feedback, formAnalysis.score);
 
     if (repCompleted) {
+      const newRepCount = repCount + 1;
       const rep: Rep = {
         id: Date.now(),
         timestamp: Date.now(),
@@ -132,6 +141,27 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
       if (navigator.vibrate) {
         navigator.vibrate(100);
       }
+      
+      // Audio feedback
+      if (audioEnabled) {
+        audioFeedback.repCompleted(newRepCount);
+        
+        // Milestone announcements
+        if (newRepCount === Math.floor(targetReps / 2)) {
+          audioFeedback.halfWay(targetReps);
+        } else if (newRepCount === targetReps - 1) {
+          audioFeedback.lastRep();
+        } else if (newRepCount === targetReps) {
+          audioFeedback.workoutComplete();
+        }
+        
+        // Form feedback after rep
+        if (formAnalysis.score >= 80) {
+          playGoodRepAudio(exercise.id);
+        } else {
+          playFormCorrectionAudio(exercise.id, formAnalysis);
+        }
+      }
     }
   }, [isActive, exercise, exerciseState, lastRepTime, addRep, updateFormFeedback]);
 
@@ -144,6 +174,69 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
       }, 1000);
     }
   }, [repCount, targetReps, isActive, endExercise, onFinish]);
+
+  // Audio helper functions
+  const playGoodRepAudio = (exerciseId: string) => {
+    switch (exerciseId) {
+      case 'squat':
+      case 'kettle-goblet-squat':
+        audioFeedback.squat.goodRep();
+        break;
+      case 'kettle-swing':
+        audioFeedback.swing.goodRep();
+        break;
+      case 'kettle-row':
+        audioFeedback.row.goodRep();
+        break;
+      case 'kettle-press':
+        audioFeedback.press.goodRep();
+        break;
+      case 'russian-twist':
+        audioFeedback.twist.goodRep();
+        break;
+    }
+  };
+
+  const playFormCorrectionAudio = (exerciseId: string, formAnalysis: { details: Record<string, number | boolean> }) => {
+    const details = formAnalysis.details;
+    
+    switch (exerciseId) {
+      case 'squat':
+      case 'kettle-goblet-squat':
+        if (!details.depthOk) audioFeedback.squat.depth();
+        else if (!details.symmetryOk) audioFeedback.squat.kneesOut();
+        else if (!details.torsoOk) audioFeedback.squat.torsoUpright();
+        break;
+      case 'kettle-swing':
+        if (!details.hingeOk) audioFeedback.swing.hingeMore();
+        else if (!details.armsOk) audioFeedback.swing.straightArms();
+        else if (!details.kneesOk) audioFeedback.swing.hipsForward();
+        break;
+      case 'kettle-row':
+        if (!details.backOk) audioFeedback.row.straightBack();
+        else if (!details.torsoOk) audioFeedback.row.elbowClose();
+        break;
+      case 'kettle-press':
+        if (!details.lockoutOk) audioFeedback.press.lockout();
+        else if (!details.torsoOk) audioFeedback.press.straightTorso();
+        else if (!details.coreOk) audioFeedback.press.tightCore();
+        break;
+      case 'russian-twist':
+        if (!details.rotationOk) audioFeedback.twist.rotateMore();
+        else if (!details.leanOk) audioFeedback.twist.leanBack();
+        break;
+    }
+  };
+
+  const toggleAudio = () => {
+    setAudioEnabled(!audioEnabled);
+    if (!audioEnabled) {
+      audioFeedback.enable();
+      audioFeedback.test();
+    } else {
+      audioFeedback.disable();
+    }
+  };
 
   if (!exercise) {
     return <div>Nie znaleziono ćwiczenia</div>;
@@ -205,12 +298,25 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
           <h1 className="text-xl font-bold">{exercise.namePl}</h1>
           <p className="text-sm text-gray-400">{exercise.name}</p>
         </div>
-        <button
-          onClick={onFinish}
-          className="px-4 py-2 bg-red-600 rounded-lg text-sm font-medium"
-        >
-          Zakończ
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={toggleAudio}
+            className={`p-2 rounded-lg text-lg transition-colors ${
+              audioEnabled 
+                ? 'bg-green-600 hover:bg-green-500' 
+                : 'bg-gray-600 hover:bg-gray-500'
+            }`}
+            title={audioEnabled ? 'Audio włączone' : 'Audio wyłączone'}
+          >
+            {audioEnabled ? '🔊' : '🔇'}
+          </button>
+          <button
+            onClick={onFinish}
+            className="px-4 py-2 bg-red-600 rounded-lg text-sm font-medium"
+          >
+            Zakończ
+          </button>
+        </div>
       </div>
 
       {/* Camera */}

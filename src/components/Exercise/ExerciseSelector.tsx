@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { EXERCISES } from '../../data/exercises';
 import { EXERCISE_INSTRUCTIONS } from '../../data/instructions';
 import type { Exercise, ExerciseInstructions } from '../../types/pose';
+import { audioFeedback } from '../../utils/audioFeedback';
 
 interface ExerciseSelectorProps {
   onSelect: (exercise: Exercise, targetReps: number) => void;
@@ -12,6 +13,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
   const [targetReps, setTargetReps] = useState(10);
   const [difficulty, setDifficulty] = useState<'all' | 'beginner' | 'intermediate' | 'advanced'>('all');
   const [showInstructions, setShowInstructions] = useState(false);
+  const [audioTested, setAudioTested] = useState(false);
 
   const filteredExercises = EXERCISES.filter(e => 
     difficulty === 'all' || e.difficulty === difficulty
@@ -98,12 +100,25 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
             {/* Setup instructions */}
             <div className="bg-gray-800 rounded-xl p-4 text-sm text-gray-400">
               <h4 className="font-medium text-white mb-2">Przed treningiem:</h4>
-              <ul className="space-y-1 list-disc list-inside">
+              <ul className="space-y-1 list-disc list-inside mb-4">
                 <li>Ustaw iPhone na statywie 2-3 metry od siebie</li>
                 <li>Upewnij się, że jest dobre świetlenie</li>
                 <li>Włącz dźwięk dla wskazówek głosowych</li>
                 <li>Ubranie: dopasowane działa lepiej niż workowate</li>
               </ul>
+              <button
+                onClick={() => {
+                  audioFeedback.test();
+                  setAudioTested(true);
+                }}
+                className={`w-full py-2 rounded-lg font-medium transition-colors ${
+                  audioTested 
+                    ? 'bg-green-600 text-white' 
+                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                }`}
+              >
+                {audioTested ? '✓ Audio działa' : '🔊 Testuj audio'}
+              </button>
             </div>
           </>
         ) : (
