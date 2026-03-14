@@ -2,7 +2,7 @@
 
 [![Deploy to GitHub Pages](https://github.com/vileen/workout-analysis/actions/workflows/deploy.yml/badge.svg)](https://github.com/vileen/workout-analysis/actions/workflows/deploy.yml)
 
-Real-time exercise form analysis app using AI (MediaPipe Pose). Runs on iPhone as a PWA (Progressive Web App).
+Real-time exercise form analysis app using AI (MediaPipe Pose). Works as a PWA (Progressive Web App) on your phone.
 
 ## 🚀 Live Demo
 
@@ -10,10 +10,10 @@ Real-time exercise form analysis app using AI (MediaPipe Pose). Runs on iPhone a
 
 ## 📱 How to Use
 
-1. Open the link on iPhone in Safari
+1. Open the link on your phone in Safari/Chrome
 2. Tap "Share" → "Add to Home Screen"
 3. Launch the app from your home screen
-4. Place iPhone on a tripod 2-3 meters in front of you
+4. Place your phone on a tripod 2-3 meters in front of you
 5. Select an exercise and start your workout
 
 ## 🏋️ Supported Exercises
@@ -64,7 +64,7 @@ npm run build
 
 ## 📋 Requirements
 
-- iPhone with iOS 14+ (or Android with Chrome)
+- Phone with iOS 14+ or Android with Chrome
 - Camera access
 - Tripod or phone holder
 - Good lighting (works best in daylight)
@@ -73,7 +73,7 @@ npm run build
 
 The app automatically checks for updates every 5 minutes. When a new version is available, you'll see an "Update Available" banner. Tap "Update" to reload with the latest version.
 
-**For iOS:** If the update doesn't work, close the app (swipe up) and reopen it.
+**For iOS:** If the update doesn't work, close the app (swipe up from the bottom) and reopen it.
 
 ## 📝 Roadmap
 
@@ -91,7 +91,7 @@ The app automatically checks for updates every 5 minutes. When a new version is 
 
 ## 🤝 Privacy
 
-The app runs entirely on your device - your data never leaves your phone. MediaPipe processes video in real-time without sending it to the cloud.
+The app runs entirely on your device - your video never leaves your phone. MediaPipe processes video in real-time without sending it to the cloud.
 
 ---
 
