@@ -29,7 +29,7 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
       'Tempo: 3 sekundy w dół, 1 sekunda w górę',
     ],
     muscles: ['Quads', 'Pośladki', 'Ścięgna podkolanowe', 'Core'],
-    videoUrl: 'https://www.youtube.com/watch?v=meXxO4XxGLs',
+    videoUrl: 'https://www.youtube.com/watch?v=8D6Xq4ruiC8',
     setupEn: [
       'Stand with feet shoulder-width apart, toes slightly outward',
       'Hold kettlebell at chest, elbows tucked in',
@@ -88,7 +88,7 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
       'Mocne zaciskanie pośladków na górze',
     ],
     muscles: ['Pośladki', 'Ścięgna podkolanowe', 'Erektor spinae', 'Core'],
-    videoUrl: 'https://www.youtube.com/watch?v=K8jP6e5xX_k',
+    videoUrl: 'https://www.youtube.com/watch?v=YSxHifyI6s8',
     setupEn: [
       'Stand with feet slightly wider than shoulders',
       'Kettlebell in front of you on floor',
@@ -147,7 +147,7 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
       'Tempo: 2 sekundy w górę, 3 w dół',
     ],
     muscles: ['Grzbiet szeroki', 'Romboidy', 'Biceps', 'Core'],
-    videoUrl: 'https://www.youtube.com/watch?v=ypQpB-6-Ahw',
+    videoUrl: 'https://www.youtube.com/watch?v=KOa8v9hGqTw',
     setupEn: [
       'Option A: Hand support on bench/chair, back leg straight',
       'Option B: Row position with torso hinge without support',
@@ -206,7 +206,7 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
       'Oddychaj - wdech w dół, wydech przy pressie',
     ],
     muscles: ['Barki', 'Triceps', 'Core', 'Stabilizatory łopatek'],
-    videoUrl: 'https://www.youtube.com/watch?v=jMhOPhTXCog',
+    videoUrl: 'https://www.youtube.com/watch?v=ljgR5wD7mv8',
     setupEn: [
       'Clean position or from rack position',
       'Kettlebell at chest, elbow at torso',
