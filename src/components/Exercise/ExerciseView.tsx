@@ -305,8 +305,8 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
       {/* Header */}
       <div className="flex items-center justify-between p-4 bg-gray-800 safe-top">
         <div>
-          <h1 className="text-xl font-bold">{exercise.namePl}</h1>
-          <p className="text-sm text-gray-400">{exercise.name}</p>
+          <h1 className="text-xl font-bold">{language === 'pl' ? exercise.namePl : exercise.name}</h1>
+          <p className="text-sm text-gray-400">{language === 'pl' ? exercise.name : exercise.namePl}</p>
         </div>
         <div className="flex items-center gap-2">
           <button

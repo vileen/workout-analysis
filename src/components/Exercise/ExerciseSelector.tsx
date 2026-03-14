@@ -109,8 +109,8 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-bold text-lg">{exercise.namePl}</h3>
-                    <p className="text-sm text-gray-400">{exercise.name}</p>
+                    <h3 className="font-bold text-lg">{language === 'pl' ? exercise.namePl : exercise.name}</h3>
+                    <p className="text-sm text-gray-400">{language === 'pl' ? exercise.name : exercise.namePl}</p>
                   </div>
                   <span className={`px-2 py-1 rounded text-xs ${
                     exercise.difficulty === 'beginner' ? 'bg-green-900 text-green-400' :
@@ -120,7 +120,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
                     {getDifficultyLabel(exercise.difficulty)}
                   </span>
                 </div>
-                <p className="mt-2 text-sm text-gray-300">{exercise.description}</p>
+                <p className="mt-2 text-sm text-gray-300">{language === 'pl' ? exercise.descriptionPl : exercise.description}</p>
               </button>
             ))}
 
@@ -156,8 +156,8 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
             <div className="p-4 bg-green-900/30 border-b border-green-800 flex-shrink-0">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl font-bold">{selectedExercise?.namePl}</h2>
-                  <p className="text-sm text-gray-400">{selectedExercise?.name}</p>
+                  <h2 className="text-xl font-bold">{language === 'pl' ? selectedExercise?.namePl : selectedExercise?.name}</h2>
+                  <p className="text-sm text-gray-400">{language === 'pl' ? selectedExercise?.name : selectedExercise?.namePl}</p>
                 </div>
                 <button
                   onClick={() => setShowInstructions(false)}
@@ -191,7 +191,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
                   <div>
                     <h3 className="font-semibold text-green-400 mb-2">{t.setup}</h3>
                     <ul className="space-y-1 text-sm text-gray-300">
-                      {instructions.setup.map((step, i) => (
+                      {(language === 'pl' ? instructions.setup : instructions.setupEn || instructions.setup).map((step, i) => (
                         <li key={i} className="flex gap-2">
                           <span className="text-green-500">{i + 1}.</span>
                           {step}
@@ -204,7 +204,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
                   <div>
                     <h3 className="font-semibold text-blue-400 mb-2">{t.execution}</h3>
                     <ul className="space-y-2 text-sm text-gray-300">
-                      {instructions.execution.map((step, i) => (
+                      {(language === 'pl' ? instructions.execution : instructions.executionEn || instructions.execution).map((step, i) => (
                         <li key={i} className="flex gap-2">
                           <span className="text-blue-500">{i + 1}.</span>
                           {step}
@@ -217,7 +217,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
                   <div>
                     <h3 className="font-semibold text-purple-400 mb-2">{t.muscles}</h3>
                     <div className="flex flex-wrap gap-2">
-                      {instructions.muscles.map((muscle, i) => (
+                      {(language === 'pl' ? instructions.muscles : instructions.musclesEn || instructions.muscles).map((muscle, i) => (
                         <span key={i} className="px-2 py-1 bg-purple-900/50 text-purple-300 rounded text-xs">
                           {muscle}
                         </span>
@@ -229,7 +229,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
                   <div className="bg-green-900/20 border border-green-800/50 rounded-lg p-3">
                     <h3 className="font-semibold text-green-400 mb-2">{t.tips}</h3>
                     <ul className="space-y-1 text-sm text-gray-300">
-                      {instructions.tips.map((tip, i) => (
+                      {(language === 'pl' ? instructions.tips : instructions.tipsEn || instructions.tips).map((tip, i) => (
                         <li key={i} className="flex gap-2">
                           <span>•</span>
                           {tip}
@@ -242,7 +242,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
                   <div className="bg-red-900/20 border border-red-800/50 rounded-lg p-3">
                     <h3 className="font-semibold text-red-400 mb-2">{t.commonMistakes}</h3>
                     <ul className="space-y-1 text-sm text-gray-300">
-                      {instructions.commonMistakes.map((mistake, i) => (
+                      {(language === 'pl' ? instructions.commonMistakes : instructions.commonMistakesEn || instructions.commonMistakes).map((mistake, i) => (
                         <li key={i} className="flex gap-2">
                           <span>•</span>
                           {mistake}

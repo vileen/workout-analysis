@@ -68,6 +68,7 @@ export interface Exercise {
   name: string;
   namePl: string;
   description: string;
+  descriptionPl: string;
   difficulty: 'beginner' | 'intermediate' | 'advanced';
 }
 
@@ -79,6 +80,12 @@ export interface ExerciseInstructions {
   tips: string[];
   muscles: string[];
   videoUrl?: string; // YouTube link
+  // English translations
+  setupEn?: string[];
+  executionEn?: string[];
+  commonMistakesEn?: string[];
+  tipsEn?: string[];
+  musclesEn?: string[];
 }
 
 // Rep state for exercise tracking

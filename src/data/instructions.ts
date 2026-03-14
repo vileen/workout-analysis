@@ -30,6 +30,33 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
     ],
     muscles: ['Quads', 'Pośladki', 'Ścięgna podkolanowe', 'Core'],
     videoUrl: 'https://www.youtube.com/watch?v=meXxO4XxGLs',
+    setupEn: [
+      'Stand with feet shoulder-width apart, toes slightly outward',
+      'Hold kettlebell at chest, elbows tucked in',
+      'Set camera to side view',
+      'Ensure good lighting',
+    ],
+    executionEn: [
+      'Inhale and sink hips - like sitting in a chair',
+      'Descend smoothly, knees track outward (in line with toes)',
+      'Hip joint below knee line (full depth)',
+      'Exhale and drive up - squeeze glutes',
+      'Knees follow toe direction throughout movement',
+    ],
+    commonMistakesEn: [
+      'Knees cave inward (knee valgus)',
+      'Short range - not reaching bottom',
+      'Rounded back - lack of core engagement',
+      'Heels lift off floor',
+      'Kettlebell drops from chest',
+    ],
+    tipsEn: [
+      'Imagine spreading the floor apart with feet',
+      'Keep elbows close to body',
+      'Gaze slightly upward, neck in neutral position',
+      'Tempo: 3 seconds down, 1 second up',
+    ],
+    musclesEn: ['Quads', 'Glutes', 'Hamstrings', 'Core'],
   },
 
   'kettle-swing': {
@@ -62,6 +89,34 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
     ],
     muscles: ['Pośladki', 'Ścięgna podkolanowe', 'Erektor spinae', 'Core'],
     videoUrl: 'https://www.youtube.com/watch?v=K8jP6e5xX_k',
+    setupEn: [
+      'Stand with feet slightly wider than shoulders',
+      'Kettlebell in front of you on floor',
+      'Toes slightly outward, soft knees',
+      'Set camera to side view (critical for this exercise)',
+    ],
+    executionEn: [
+      'Hinge at hips, straight back, chest open',
+      'Grab kettlebell and swing between legs (backswing)',
+      'Explosively extend hips - kettlebell flies up',
+      'Power only from hips, arms are "ropes" (no pulling)',
+      'Kettlebell to horizontal position (arms straight)',
+      'Smooth return - kettlebell drops, hips hinge',
+    ],
+    commonMistakesEn: [
+      'Squat instead of hip hinge (too much knee)',
+      'Pulling with arms - kettle goes too high',
+      'Rounded back at bottom position',
+      'Incomplete hip extension at top',
+      'Over-swing (above horizontal)',
+    ],
+    tipsEn: [
+      'Hip hinge is a bow movement (hips back)',
+      'Arms relaxed, just guide kettlebell',
+      'Inhale down, exhale at extension',
+      'Strong glute squeeze at top',
+    ],
+    musclesEn: ['Glutes', 'Hamstrings', 'Erector spinae', 'Core'],
   },
 
   'kettle-row': {
@@ -93,6 +148,33 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
     ],
     muscles: ['Grzbiet szeroki', 'Romboidy', 'Biceps', 'Core'],
     videoUrl: 'https://www.youtube.com/watch?v=ypQpB-6-Ahw',
+    setupEn: [
+      'Option A: Hand support on bench/chair, back leg straight',
+      'Option B: Row position with torso hinge without support',
+      'Kettlebell in working hand, shoulder over hand',
+      'Set camera to side or rear (depends on variant)',
+    ],
+    executionEn: [
+      'Straight back, torso nearly parallel to floor',
+      'Shoulder blade down and back (don\'t shrug)',
+      'Pull kettlebell to hip - elbow close to body',
+      'Focus on retracting scapula, not pulling with arm',
+      'Controlled lowering - full stretch',
+    ],
+    commonMistakesEn: [
+      'Rounded back - no neutral spine',
+      'Torso rotation (reaching shoulder forward)',
+      'Elbow drifting away from body',
+      'Short range of motion',
+      'Shoulder tension (shrugging to ear)',
+    ],
+    tipsEn: [
+      'Imagine pulling shoulder blade to pocket',
+      'Elbow leads the movement, not hand',
+      'Movement plane along torso',
+      'Tempo: 2 seconds up, 3 down',
+    ],
+    musclesEn: ['Latissimus dorsi', 'Rhomboids', 'Biceps', 'Core'],
   },
 
   'kettle-press': {
@@ -125,6 +207,34 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
     ],
     muscles: ['Barki', 'Triceps', 'Core', 'Stabilizatory łopatek'],
     videoUrl: 'https://www.youtube.com/watch?v=jMhOPhTXCog',
+    setupEn: [
+      'Clean position or from rack position',
+      'Kettlebell at chest, elbow at torso',
+      'Feet shoulder-width, tight core',
+      'Set camera to side view',
+    ],
+    executionEn: [
+      'Tight core, pelvis in neutral position',
+      'Inhale and slight torso rotation (for single-arm press)',
+      'Press kettlebell up - elbow goes to side',
+      'Lock out elbow at top (arm straight)',
+      'Stabilization - straight torso, no leaning',
+      'Controlled lower to rack position',
+    ],
+    commonMistakesEn: [
+      'Leaning to side (lack of stabilization)',
+      'Elbow too far from body (losing power)',
+      'Incomplete lockout at top',
+      'Wrist bent instead of straight',
+      'Thrusting hips forward during press',
+    ],
+    tipsEn: [
+      'Stabilize hips - engage glutes and abs',
+      'Look forward, not at kettlebell',
+      'Elbow at 45° from body (not forward, not to side)',
+      'Breathe - inhale down, exhale on press',
+    ],
+    musclesEn: ['Shoulders', 'Triceps', 'Core', 'Scapular stabilizers'],
   },
 
   'russian-twist': {
@@ -157,5 +267,33 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
     ],
     muscles: ['Mięśnie skośne brzucha', 'Core', 'Hip flexors'],
     videoUrl: 'https://www.youtube.com/watch?v=wkD8rjkodUI',
+    setupEn: [
+      'Sit with bent knees, heels on floor (or lifted for harder version)',
+      'Kettlebell held with both hands in front of chest',
+      'Torso leaning back 30-45° from vertical',
+      'Set camera to front view',
+    ],
+    executionEn: [
+      'Lean back, balance on sit bones',
+      'Tight core, straight back (don\'t round)',
+      'Rotate torso right - kettlebell at hip',
+      'Return through center and rotate left',
+      'Shoulders rotate with torso',
+      'Feet on floor (or lifted 15cm for progression)',
+    ],
+    commonMistakesEn: [
+      'Too much forward lean - back rounds',
+      'Too little rotation - only arms move',
+      'Side movement instead of rotation (hips moving)',
+      'Neck straining instead of abs',
+      'Fast, uncontrolled movement',
+    ],
+    tipsEn: [
+      'Think rotation, not touching floor with kettlebell',
+      'Inhale center, exhale on rotation',
+      'Imagine string pulling you up by sternum',
+      'Slower = better for muscles',
+    ],
+    musclesEn: ['Obliques', 'Core', 'Hip flexors'],
   },
 };
