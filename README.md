@@ -1,40 +1,41 @@
-# Form Analyzer - Analiza Formy Treningowej
+# Form Analyzer - Workout Form Analysis
 
 [![Deploy to GitHub Pages](https://github.com/vileen/workout-analysis/actions/workflows/deploy.yml/badge.svg)](https://github.com/vileen/workout-analysis/actions/workflows/deploy.yml)
 
-Aplikacja do analizy formy ćwiczeń w czasie rzeczywistym z wykorzystaniem AI (MediaPipe Pose). Uruchamia się na iPhone jako PWA (Progressive Web App).
+Real-time exercise form analysis app using AI (MediaPipe Pose). Runs on iPhone as a PWA (Progressive Web App).
 
 ## 🚀 Live Demo
 
 **GitHub Pages:** https://vileen.github.io/workout-analysis/
 
-## 📱 Jak używać
+## 📱 How to Use
 
-1. Otwórz link na iPhone w Safari
-2. Kliknij "Share" → "Add to Home Screen"
-3. Uruchom aplikację z ekranu głównego
-4. Ustaw iPhone na statywie 2-3 metry przed Tobą
-5. Wybierz ćwiczenie i rozpocznij trening
+1. Open the link on iPhone in Safari
+2. Tap "Share" → "Add to Home Screen"
+3. Launch the app from your home screen
+4. Place iPhone on a tripod 2-3 meters in front of you
+5. Select an exercise and start your workout
 
-## 🏋️ Wspierane ćwiczenia
+## 🏋️ Supported Exercises
 
-| Ćwiczenie | Poziom | Co analizuje |
+| Exercise | Level | Analyzes |
 |-----------|--------|--------------|
-| **Kettle Goblet Squat** | Początkujący | Głębokość, kąt tułowia, symetria kolan |
-| **Kettle Swing** | Średni | Hip hinge, proste ramiona, zgięcie kolan |
-| **Kettle Row** | Początkujący | Pochylenie tułowia, zakres łokcia, proste plecy |
-| **Kettle Press** | Średni | Pionowy tułów, stabilność bioder, blokada |
-| **Russian Twist** | Początkujący | Odchylenie tułowia, rotacja, równe barki |
+| **Kettle Goblet Squat** | Beginner | Depth, torso angle, knee symmetry |
+| **Kettle Swing** | Intermediate | Hip hinge, straight arms, knee bend |
+| **Kettle Row** | Beginner | Torso lean, elbow range, straight back |
+| **Kettle Press** | Intermediate | Vertical torso, hip stability, lockout |
+| **Russian Twist** | Beginner | Torso lean, rotation, shoulder level |
 
-## ✨ Funkcje
+## ✨ Features
 
-- **Analiza w czasie rzeczywistym** - MediaPipe działa lokalnie na urządzeniu
-- **Feedback wizualny** - Szkielet z kolorowymi wskazówkami
-- **Feedback audio** - Głosowe komendy (wkrótce)
-- **Liczenie powtórzeń** - Automatyczne wykrywanie
-- **Ocena formy** - Score 0-100 dla każdego repa
-- **Wibracje** - Haptic feedback po każdym powtórzeniu
-- **Instrukcje** - Szczegółowe wskazówki dla każdego ćwiczenia
+- **Real-time analysis** - MediaPipe runs locally on device
+- **Visual feedback** - Skeleton with color-coded cues
+- **Audio feedback** - Voice commands in Polish
+- **Rep counting** - Automatic detection
+- **Form scoring** - Score 0-100 for each rep
+- **Haptic feedback** - Vibration after each repetition
+- **Instructions** - Detailed guidance for each exercise
+- **PWA updates** - Automatic update notifications
 
 ## 🛠️ Tech Stack
 
@@ -61,30 +62,37 @@ npm run dev
 npm run build
 ```
 
-## 📋 Wymagania
+## 📋 Requirements
 
-- iPhone z iOS 14+ (lub Android z Chrome)
-- Dostęp do kamery
-- Statyw lub uchwyt na telefon
-- Dobra iluminacja (działa najlepiej w świetle dziennym)
+- iPhone with iOS 14+ (or Android with Chrome)
+- Camera access
+- Tripod or phone holder
+- Good lighting (works best in daylight)
+
+## 🔄 PWA Updates
+
+The app automatically checks for updates every 5 minutes. When a new version is available, you'll see an "Update Available" banner. Tap "Update" to reload with the latest version.
+
+**For iOS:** If the update doesn't work, close the app (swipe up) and reopen it.
 
 ## 📝 Roadmap
 
-- [x] Podstawowa analiza 5 ćwiczeń kettlebell
-- [x] Liczenie powtórzeń dla wszystkich ćwiczeń
-- [x] Feedback wizualny (szkielet)
-- [x] Instrukcje dla każdego ćwiczenia
-- [ ] Audio feedback (głosowe komendy)
-- [ ] Historia treningów
-- [ ] Statystyki i wykresy postępów
-- [ ] Więcej ćwiczeń (pompki, plank, wykroki)
-- [ ] Kalibracja kamery do wzrostu
-- [ ] Export do Apple Health
+- [x] Basic analysis of 5 kettlebell exercises
+- [x] Rep counting for all exercises
+- [x] Visual feedback (skeleton)
+- [x] Instructions for each exercise
+- [x] Audio feedback (voice commands)
+- [x] PWA update handling
+- [ ] Workout history
+- [ ] Progress statistics and charts
+- [ ] More exercises (push-ups, plank, lunges)
+- [ ] Camera calibration for height
+- [ ] Apple Health export
 
-## 🤝 Wsparcie
+## 🤝 Privacy
 
-Aplikacja działa lokalnie na urządzeniu - twoje dane nie opuszczają telefonu. MediaPipe procesuje obraz w czasie rzeczywistym bez wysyłania go do chmury.
+The app runs entirely on your device - your data never leaves your phone. MediaPipe processes video in real-time without sending it to the cloud.
 
 ---
 
-Stworzone z 💪 dla pasjonatów kettlebell
+Built with 💪 for kettlebell enthusiasts
