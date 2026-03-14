@@ -3,12 +3,14 @@ import { EXERCISES } from '../../data/exercises';
 import { EXERCISE_INSTRUCTIONS } from '../../data/instructions';
 import type { Exercise, ExerciseInstructions } from '../../types/pose';
 import { audioFeedback } from '../../utils/audioFeedback';
+import { useTranslation } from '../../i18n';
 
 interface ExerciseSelectorProps {
   onSelect: (exercise: Exercise, targetReps: number) => void;
 }
 
 export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
+  const { t, language, setLanguage } = useTranslation();
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [targetReps, setTargetReps] = useState(10);
   const [difficulty, setDifficulty] = useState<'all' | 'beginner' | 'intermediate' | 'advanced'>('all');
@@ -36,14 +38,44 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
 
   const instructions = selectedExercise ? getInstructions(selectedExercise.id) : null;
 
+  const getDifficultyLabel = (level: string) => {
+    switch (level) {
+      case 'beginner': return t.beginner;
+      case 'intermediate': return t.intermediate;
+      case 'advanced': return t.advanced;
+      default: return t.allLevels;
+    }
+  };
+
   return (
     <div className="h-screen bg-gray-900 text-white overflow-hidden">
       {!showInstructions ? (
         <div className="h-full flex flex-col max-w-md mx-auto">
           {/* Header - fixed */}
-          <div className="text-center pt-8 pb-4 px-4 flex-shrink-0">
-            <h1 className="text-3xl font-bold mb-2">Form Analyzer</h1>
-            <p className="text-gray-400">Analiza formy w czasie rzeczywistym</p>
+          <div className="text-center pt-6 pb-2 px-4 flex-shrink-0">
+            {/* Language selector */}
+            <div className="flex justify-end mb-2">
+              <div className="flex bg-gray-800 rounded-lg overflow-hidden">
+                <button
+                  onClick={() => setLanguage('pl')}
+                  className={`px-3 py-1 text-sm font-medium transition-colors ${
+                    language === 'pl' ? 'bg-green-600 text-white' : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  PL
+                </button>
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={`px-3 py-1 text-sm font-medium transition-colors ${
+                    language === 'en' ? 'bg-green-600 text-white' : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  EN
+                </button>
+              </div>
+            </div>
+            <h1 className="text-3xl font-bold mb-2">{t.appName}</h1>
+            <p className="text-gray-400">{t.appSubtitle}</p>
           </div>
 
           {/* Difficulty filter - fixed */}
@@ -58,9 +90,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
                     : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                 }`}
               >
-                {level === 'all' ? 'Wszystkie' : 
-                 level === 'beginner' ? 'Początkujący' : 
-                 level === 'intermediate' ? 'Średni' : 'Zaawansowany'}
+                {getDifficultyLabel(level)}
               </button>
             ))}
           </div>
@@ -87,8 +117,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
                     exercise.difficulty === 'intermediate' ? 'bg-yellow-900 text-yellow-400' :
                     'bg-red-900 text-red-400'
                   }`}>
-                    {exercise.difficulty === 'beginner' ? 'Początkujący' :
-                     exercise.difficulty === 'intermediate' ? 'Średni' : 'Zaawansowany'}
+                    {getDifficultyLabel(exercise.difficulty)}
                   </span>
                 </div>
                 <p className="mt-2 text-sm text-gray-300">{exercise.description}</p>
@@ -97,12 +126,12 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
 
             {/* Setup instructions */}
             <div className="bg-gray-800 rounded-xl p-4 text-sm text-gray-400 mt-4">
-              <h4 className="font-medium text-white mb-2">Przed treningiem:</h4>
+              <h4 className="font-medium text-white mb-2">{t.beforeWorkout}</h4>
               <ul className="space-y-1 list-disc list-inside mb-4">
-                <li>Ustaw iPhone na statywie 2-3 metry od siebie</li>
-                <li>Upewnij się, że jest dobre świetlenie</li>
-                <li>Włącz dźwięk dla wskazówek głosowych</li>
-                <li>Ubranie: dopasowane działa lepiej niż workowate</li>
+                <li>{t.setupPhone}</li>
+                <li>{t.goodLighting}</li>
+                <li>{t.enableSound}</li>
+                <li>{t.tightClothing}</li>
               </ul>
               <button
                 onClick={() => {
@@ -115,7 +144,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
                     : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                 }`}
               >
-                {audioTested ? '✓ Audio działa' : '🔊 Testuj audio'}
+                {audioTested ? t.audioWorks : t.testAudio}
               </button>
             </div>
           </div>
@@ -142,9 +171,25 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
             <div className="flex-1 overflow-y-auto p-4 space-y-6">
               {instructions && (
                 <>
+                  {/* Video Link */}
+                  {instructions.videoUrl && (
+                    <div className="bg-red-900/20 border border-red-800/50 rounded-lg p-3">
+                      <a
+                        href={instructions.videoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-red-400 hover:text-red-300 transition-colors"
+                      >
+                        <span className="text-xl">🎬</span>
+                        <span className="font-semibold">{t.watchVideo}</span>
+                        <span className="ml-auto text-xs text-gray-500">↗</span>
+                      </a>
+                    </div>
+                  )}
+
                   {/* Setup */}
                   <div>
-                    <h3 className="font-semibold text-green-400 mb-2">🎯 Ustawienie</h3>
+                    <h3 className="font-semibold text-green-400 mb-2">{t.setup}</h3>
                     <ul className="space-y-1 text-sm text-gray-300">
                       {instructions.setup.map((step, i) => (
                         <li key={i} className="flex gap-2">
@@ -157,7 +202,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
 
                   {/* Execution */}
                   <div>
-                    <h3 className="font-semibold text-blue-400 mb-2">▶️ Wykonanie</h3>
+                    <h3 className="font-semibold text-blue-400 mb-2">{t.execution}</h3>
                     <ul className="space-y-2 text-sm text-gray-300">
                       {instructions.execution.map((step, i) => (
                         <li key={i} className="flex gap-2">
@@ -170,7 +215,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
 
                   {/* Muscles */}
                   <div>
-                    <h3 className="font-semibold text-purple-400 mb-2">💪 Mięśnie</h3>
+                    <h3 className="font-semibold text-purple-400 mb-2">{t.muscles}</h3>
                     <div className="flex flex-wrap gap-2">
                       {instructions.muscles.map((muscle, i) => (
                         <span key={i} className="px-2 py-1 bg-purple-900/50 text-purple-300 rounded text-xs">
@@ -182,7 +227,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
 
                   {/* Tips */}
                   <div className="bg-green-900/20 border border-green-800/50 rounded-lg p-3">
-                    <h3 className="font-semibold text-green-400 mb-2">💡 Wskazówki</h3>
+                    <h3 className="font-semibold text-green-400 mb-2">{t.tips}</h3>
                     <ul className="space-y-1 text-sm text-gray-300">
                       {instructions.tips.map((tip, i) => (
                         <li key={i} className="flex gap-2">
@@ -195,7 +240,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
 
                   {/* Common Mistakes */}
                   <div className="bg-red-900/20 border border-red-800/50 rounded-lg p-3">
-                    <h3 className="font-semibold text-red-400 mb-2">⚠️ Typowe błędy</h3>
+                    <h3 className="font-semibold text-red-400 mb-2">{t.commonMistakes}</h3>
                     <ul className="space-y-1 text-sm text-gray-300">
                       {instructions.commonMistakes.map((mistake, i) => (
                         <li key={i} className="flex gap-2">
@@ -211,7 +256,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
               {/* Target reps selector */}
               <div className="border-t border-gray-700 pt-4">
                 <label className="block text-sm font-medium text-gray-400 mb-3">
-                  Liczba powtórzeń
+                  {t.targetReps}
                 </label>
                 <div className="flex items-center gap-4">
                   <input
@@ -232,7 +277,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
                 onClick={handleStart}
                 className="w-full py-4 rounded-xl font-bold text-lg bg-green-600 hover:bg-green-500 text-white transition-all"
               >
-                Rozpocznij trening
+                {t.startWorkout}
               </button>
             </div>
           </div>

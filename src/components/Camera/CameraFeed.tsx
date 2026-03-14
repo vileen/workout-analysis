@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import type { Pose as AppPose } from '../../types/pose';
+import { useTranslation } from '../../i18n';
 
 // MediaPipe globals
 declare global {
@@ -19,6 +20,7 @@ interface CameraFeedProps {
 }
 
 export function CameraFeed({ onPoseDetected, isActive, showSkeleton = true }: CameraFeedProps) {
+  const { t } = useTranslation();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [error, setError] = useState<string | null>(null);
@@ -52,7 +54,7 @@ export function CameraFeed({ onPoseDetected, isActive, showSkeleton = true }: Ca
     };
     
     loadScripts().catch(() => {
-      setError('Nie udało się załadować MediaPipe');
+      setError(t.cameraAccessError);
       setIsLoading(false);
     });
   }, []);

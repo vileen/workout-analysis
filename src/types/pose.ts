@@ -78,6 +78,7 @@ export interface ExerciseInstructions {
   commonMistakes: string[];
   tips: string[];
   muscles: string[];
+  videoUrl?: string; // YouTube link
 }
 
 // Rep state for exercise tracking

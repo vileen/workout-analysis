@@ -29,6 +29,7 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
       'Tempo: 3 sekundy w dół, 1 sekunda w górę',
     ],
     muscles: ['Quads', 'Pośladki', 'Ścięgna podkolanowe', 'Core'],
+    videoUrl: 'https://www.youtube.com/watch?v=meXxO4XxGLs',
   },
 
   'kettle-swing': {
@@ -60,6 +61,7 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
       'Mocne zaciskanie pośladków na górze',
     ],
     muscles: ['Pośladki', 'Ścięgna podkolanowe', 'Erektor spinae', 'Core'],
+    videoUrl: 'https://www.youtube.com/watch?v=K8jP6e5xX_k',
   },
 
   'kettle-row': {
@@ -90,6 +92,7 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
       'Tempo: 2 sekundy w górę, 3 w dół',
     ],
     muscles: ['Grzbiet szeroki', 'Romboidy', 'Biceps', 'Core'],
+    videoUrl: 'https://www.youtube.com/watch?v=ypQpB-6-Ahw',
   },
 
   'kettle-press': {
@@ -121,6 +124,7 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
       'Oddychaj - wdech w dół, wydech przy pressie',
     ],
     muscles: ['Barki', 'Triceps', 'Core', 'Stabilizatory łopatek'],
+    videoUrl: 'https://www.youtube.com/watch?v=jMhOPhTXCog',
   },
 
   'russian-twist': {
@@ -152,5 +156,6 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
       'Wolniej = lepiej dla mięśni',
     ],
     muscles: ['Mięśnie skośne brzucha', 'Core', 'Hip flexors'],
+    videoUrl: 'https://www.youtube.com/watch?v=wkD8rjkodUI',
   },
 };

@@ -4,6 +4,7 @@ import type { Pose, Rep } from '../../types/pose';
 import { useWorkoutStore } from '../../stores/workoutStore';
 import { getExerciseById } from '../../data/exercises';
 import { audioFeedback } from '../../utils/audioFeedback';
+import { useTranslation } from '../../i18n';
 
 // Import all analyzers
 import { analyzeSquat, detectSquatRep, getInitialSquatState } from '../../engines/squatAnalyzer';
@@ -28,6 +29,7 @@ interface ExerciseViewProps {
 type ExerciseState = SquatState | GobletSquatState | KettleSwingState | KettleRowState | KettlePressState | RussianTwistState;
 
 export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewProps) {
+  const { t, language } = useTranslation();
   const exercise = getExerciseById(exerciseId as any);
   const [exerciseState, setExerciseState] = useState<ExerciseState | null>(null);
   const [lastRepTime, setLastRepTime] = useState<number>(0);
@@ -76,7 +78,7 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
     // Initialize audio
     if (audioEnabled) {
       audioFeedback.enable();
-      setTimeout(() => audioFeedback.speak('Start!', 'high'), 500);
+      setTimeout(() => audioFeedback.speak(t.start, 'high'), 500);
     }
     
     return () => {
@@ -144,15 +146,23 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
       
       // Audio feedback
       if (audioEnabled) {
-        audioFeedback.repCompleted(newRepCount);
+        // Rep count in selected language
+        if (language === 'pl') {
+          if (newRepCount === 1) audioFeedback.speak(t.first, 'high');
+          else if (newRepCount === 2) audioFeedback.speak(t.second, 'high');
+          else if (newRepCount === 3) audioFeedback.speak(t.third, 'high');
+          else audioFeedback.speak(`${newRepCount}!`, 'high');
+        } else {
+          audioFeedback.speak(`${newRepCount}!`, 'high');
+        }
         
         // Milestone announcements
         if (newRepCount === Math.floor(targetReps / 2)) {
-          audioFeedback.halfWay(targetReps);
+          audioFeedback.speak(`${t.halfWay} ${targetReps / 2} ${t.reps}`, 'medium');
         } else if (newRepCount === targetReps - 1) {
-          audioFeedback.lastRep();
+          audioFeedback.speak(t.lastRep, 'high');
         } else if (newRepCount === targetReps) {
-          audioFeedback.workoutComplete();
+          audioFeedback.speak(t.workoutComplete, 'high');
         }
         
         // Form feedback after rep
@@ -180,19 +190,19 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
     switch (exerciseId) {
       case 'squat':
       case 'kettle-goblet-squat':
-        audioFeedback.squat.goodRep();
+        audioFeedback.speak(t.squat.goodRep, 'low');
         break;
       case 'kettle-swing':
-        audioFeedback.swing.goodRep();
+        audioFeedback.speak(t.swing.goodRep, 'low');
         break;
       case 'kettle-row':
-        audioFeedback.row.goodRep();
+        audioFeedback.speak(t.row.goodRep, 'low');
         break;
       case 'kettle-press':
-        audioFeedback.press.goodRep();
+        audioFeedback.speak(t.press.goodRep, 'low');
         break;
       case 'russian-twist':
-        audioFeedback.twist.goodRep();
+        audioFeedback.speak(t.twist.goodRep, 'low');
         break;
     }
   };
@@ -203,27 +213,27 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
     switch (exerciseId) {
       case 'squat':
       case 'kettle-goblet-squat':
-        if (!details.depthOk) audioFeedback.squat.depth();
-        else if (!details.symmetryOk) audioFeedback.squat.kneesOut();
-        else if (!details.torsoOk) audioFeedback.squat.torsoUpright();
+        if (!details.depthOk) audioFeedback.speak(t.squat.depth, 'medium');
+        else if (!details.symmetryOk) audioFeedback.speak(t.squat.kneesOut, 'medium');
+        else if (!details.torsoOk) audioFeedback.speak(t.squat.torsoUpright, 'medium');
         break;
       case 'kettle-swing':
-        if (!details.hingeOk) audioFeedback.swing.hingeMore();
-        else if (!details.armsOk) audioFeedback.swing.straightArms();
-        else if (!details.kneesOk) audioFeedback.swing.hipsForward();
+        if (!details.hingeOk) audioFeedback.speak(t.swing.hingeMore, 'medium');
+        else if (!details.armsOk) audioFeedback.speak(t.swing.straightArms, 'medium');
+        else if (!details.kneesOk) audioFeedback.speak(t.swing.hipsForward, 'medium');
         break;
       case 'kettle-row':
-        if (!details.backOk) audioFeedback.row.straightBack();
-        else if (!details.torsoOk) audioFeedback.row.elbowClose();
+        if (!details.backOk) audioFeedback.speak(t.row.straightBack, 'medium');
+        else if (!details.torsoOk) audioFeedback.speak(t.row.elbowClose, 'medium');
         break;
       case 'kettle-press':
-        if (!details.lockoutOk) audioFeedback.press.lockout();
-        else if (!details.torsoOk) audioFeedback.press.straightTorso();
-        else if (!details.coreOk) audioFeedback.press.tightCore();
+        if (!details.lockoutOk) audioFeedback.speak(t.press.lockout, 'medium');
+        else if (!details.torsoOk) audioFeedback.speak(t.press.straightTorso, 'medium');
+        else if (!details.coreOk) audioFeedback.speak(t.press.tightCore, 'medium');
         break;
       case 'russian-twist':
-        if (!details.rotationOk) audioFeedback.twist.rotateMore();
-        else if (!details.leanOk) audioFeedback.twist.leanBack();
+        if (!details.rotationOk) audioFeedback.speak(t.twist.rotateMore, 'medium');
+        else if (!details.leanOk) audioFeedback.speak(t.twist.leanBack, 'medium');
         break;
     }
   };
@@ -252,36 +262,36 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
         return {
           primary: Math.round((exerciseState as SquatState).kneeAngle),
           secondary: Math.round((exerciseState as SquatState).torsoAngle),
-          label: 'kąt kolana',
-          secondaryLabel: 'tułów',
+          label: t.kneeAngle,
+          secondaryLabel: t.torso,
         };
       case 'kettle-swing':
         return {
           primary: Math.round((exerciseState as KettleSwingState).hipAngle),
           secondary: Math.round((exerciseState as KettleSwingState).armAngle),
-          label: 'hip hinge',
-          secondaryLabel: 'ramiona',
+          label: t.hipHinge,
+          secondaryLabel: t.arms,
         };
       case 'kettle-row':
         return {
           primary: Math.round((exerciseState as KettleRowState).elbowAngle),
           secondary: Math.round((exerciseState as KettleRowState).torsoAngle),
-          label: 'łokieć',
-          secondaryLabel: 'tułów',
+          label: t.elbow,
+          secondaryLabel: t.torso,
         };
       case 'kettle-press':
         return {
           primary: Math.round((exerciseState as KettlePressState).elbowAngle),
           secondary: Math.round((exerciseState as KettlePressState).torsoAngle),
-          label: 'łokieć',
-          secondaryLabel: 'tułów',
+          label: t.elbow,
+          secondaryLabel: t.torso,
         };
       case 'russian-twist':
         return {
           primary: Math.round((exerciseState as RussianTwistState).torsoLean),
           secondary: Math.round((exerciseState as RussianTwistState).rotationAngle),
-          label: 'odchylenie',
-          secondaryLabel: 'rotacja',
+          label: t.lean,
+          secondaryLabel: t.rotation,
         };
       default:
         return { primary: 0, secondary: 0, label: '', secondaryLabel: '' };
@@ -314,7 +324,7 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
             onClick={onFinish}
             className="px-4 py-2 bg-red-600 rounded-lg text-sm font-medium"
           >
-            Zakończ
+            {t.endWorkout}
           </button>
         </div>
       </div>
@@ -334,7 +344,7 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
         <div className="flex items-center justify-between">
           <div className="text-center">
             <p className="text-4xl font-bold">{repCount}</p>
-            <p className="text-sm text-gray-400">/ {targetReps} powtórzeń</p>
+            <p className="text-sm text-gray-400">{t.ofReps} {targetReps} {t.reps}</p>
           </div>
           
           {/* Form score */}
@@ -345,7 +355,7 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
             }`}>
               {currentFormScore}
             </p>
-            <p className="text-sm text-gray-400">forma</p>
+            <p className="text-sm text-gray-400">{t.form}</p>
           </div>
           
           {/* Primary metric */}
