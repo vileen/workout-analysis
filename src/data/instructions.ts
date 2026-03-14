@@ -29,7 +29,7 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
       'Tempo: 3 sekundy w dół, 1 sekunda w górę',
     ],
     muscles: ['Quads', 'Pośladki', 'Ścięgna podkolanowe', 'Core'],
-    videoUrl: 'https://www.youtube.com/watch?v=8D6Xq4ruiC8',
+    videoUrl: 'https://www.youtube.com/watch?v=i2AtDi4yZSA',
     setupEn: [
       'Stand with feet shoulder-width apart, toes slightly outward',
       'Hold kettlebell at chest, elbows tucked in',
@@ -147,7 +147,7 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
       'Tempo: 2 sekundy w górę, 3 w dół',
     ],
     muscles: ['Grzbiet szeroki', 'Romboidy', 'Biceps', 'Core'],
-    videoUrl: 'https://www.youtube.com/watch?v=KOa8v9hGqTw',
+    videoUrl: 'https://www.youtube.com/watch?v=IlNaupDwxIs',
     setupEn: [
       'Option A: Hand support on bench/chair, back leg straight',
       'Option B: Row position with torso hinge without support',
@@ -206,7 +206,7 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
       'Oddychaj - wdech w dół, wydech przy pressie',
     ],
     muscles: ['Barki', 'Triceps', 'Core', 'Stabilizatory łopatek'],
-    videoUrl: 'https://www.youtube.com/watch?v=ljgR5wD7mv8',
+    videoUrl: 'https://www.youtube.com/watch?v=eKQ0JOx_1qI',
     setupEn: [
       'Clean position or from rack position',
       'Kettlebell at chest, elbow at torso',
@@ -266,7 +266,7 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
       'Wolniej = lepiej dla mięśni',
     ],
     muscles: ['Mięśnie skośne brzucha', 'Core', 'Hip flexors'],
-    videoUrl: 'https://www.youtube.com/watch?v=wkD8rjkodUI',
+    videoUrl: 'https://www.youtube.com/watch?v=PkGPokybYaU',
     setupEn: [
       'Sit with bent knees, heels on floor (or lifted for harder version)',
       'Kettlebell held with both hands in front of chest',
