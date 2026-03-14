@@ -37,68 +37,66 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
   const instructions = selectedExercise ? getInstructions(selectedExercise.id) : null;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-4">
-      <div className="max-w-md mx-auto space-y-6">
-        {/* Header */}
-        <div className="text-center py-8">
-          <h1 className="text-3xl font-bold mb-2">Form Analyzer</h1>
-          <p className="text-gray-400">Analiza formy w czasie rzeczywistym</p>
-        </div>
+    <div className="h-screen bg-gray-900 text-white overflow-hidden">
+      {!showInstructions ? (
+        <div className="h-full flex flex-col max-w-md mx-auto">
+          {/* Header - fixed */}
+          <div className="text-center pt-8 pb-4 px-4 flex-shrink-0">
+            <h1 className="text-3xl font-bold mb-2">Form Analyzer</h1>
+            <p className="text-gray-400">Analiza formy w czasie rzeczywistym</p>
+          </div>
 
-        {!showInstructions ? (
-          <>
-            {/* Difficulty filter */}
-            <div className="flex gap-2 justify-center flex-wrap">
-              {(['all', 'beginner', 'intermediate', 'advanced'] as const).map((level) => (
-                <button
-                  key={level}
-                  onClick={() => setDifficulty(level)}
-                  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
-                    difficulty === level
-                      ? 'bg-green-600 text-white'
-                      : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
-                  }`}
-                >
-                  {level === 'all' ? 'Wszystkie' : 
-                   level === 'beginner' ? 'Początkujący' : 
-                   level === 'intermediate' ? 'Średni' : 'Zaawansowany'}
-                </button>
-              ))}
-            </div>
+          {/* Difficulty filter - fixed */}
+          <div className="flex gap-2 justify-center flex-wrap px-4 pb-4 flex-shrink-0">
+            {(['all', 'beginner', 'intermediate', 'advanced'] as const).map((level) => (
+              <button
+                key={level}
+                onClick={() => setDifficulty(level)}
+                className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                  difficulty === level
+                    ? 'bg-green-600 text-white'
+                    : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                }`}
+              >
+                {level === 'all' ? 'Wszystkie' : 
+                 level === 'beginner' ? 'Początkujący' : 
+                 level === 'intermediate' ? 'Średni' : 'Zaawansowany'}
+              </button>
+            ))}
+          </div>
 
-            {/* Exercise list */}
-            <div className="space-y-3">
-              {filteredExercises.map((exercise) => (
-                <button
-                  key={exercise.id}
-                  onClick={() => handleExerciseClick(exercise)}
-                  className={`w-full p-4 rounded-xl text-left transition-all ${
-                    selectedExercise?.id === exercise.id
-                      ? 'bg-green-600 ring-2 ring-green-400'
-                      : 'bg-gray-800 hover:bg-gray-700'
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="font-bold text-lg">{exercise.namePl}</h3>
-                      <p className="text-sm text-gray-400">{exercise.name}</p>
-                    </div>
-                    <span className={`px-2 py-1 rounded text-xs ${
-                      exercise.difficulty === 'beginner' ? 'bg-green-900 text-green-400' :
-                      exercise.difficulty === 'intermediate' ? 'bg-yellow-900 text-yellow-400' :
-                      'bg-red-900 text-red-400'
-                    }`}>
-                      {exercise.difficulty === 'beginner' ? 'Początkujący' :
-                       exercise.difficulty === 'intermediate' ? 'Średni' : 'Zaawansowany'}
-                    </span>
+          {/* Exercise list - scrollable */}
+          <div className="flex-1 overflow-y-auto px-4 pb-4 space-y-3">
+            {filteredExercises.map((exercise) => (
+              <button
+                key={exercise.id}
+                onClick={() => handleExerciseClick(exercise)}
+                className={`w-full p-4 rounded-xl text-left transition-all ${
+                  selectedExercise?.id === exercise.id
+                    ? 'bg-green-600 ring-2 ring-green-400'
+                    : 'bg-gray-800 hover:bg-gray-700'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-bold text-lg">{exercise.namePl}</h3>
+                    <p className="text-sm text-gray-400">{exercise.name}</p>
                   </div>
-                  <p className="mt-2 text-sm text-gray-300">{exercise.description}</p>
-                </button>
-              ))}
-            </div>
+                  <span className={`px-2 py-1 rounded text-xs ${
+                    exercise.difficulty === 'beginner' ? 'bg-green-900 text-green-400' :
+                    exercise.difficulty === 'intermediate' ? 'bg-yellow-900 text-yellow-400' :
+                    'bg-red-900 text-red-400'
+                  }`}>
+                    {exercise.difficulty === 'beginner' ? 'Początkujący' :
+                     exercise.difficulty === 'intermediate' ? 'Średni' : 'Zaawansowany'}
+                  </span>
+                </div>
+                <p className="mt-2 text-sm text-gray-300">{exercise.description}</p>
+              </button>
+            ))}
 
             {/* Setup instructions */}
-            <div className="bg-gray-800 rounded-xl p-4 text-sm text-gray-400">
+            <div className="bg-gray-800 rounded-xl p-4 text-sm text-gray-400 mt-4">
               <h4 className="font-medium text-white mb-2">Przed treningiem:</h4>
               <ul className="space-y-1 list-disc list-inside mb-4">
                 <li>Ustaw iPhone na statywie 2-3 metry od siebie</li>
@@ -120,11 +118,13 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
                 {audioTested ? '✓ Audio działa' : '🔊 Testuj audio'}
               </button>
             </div>
-          </>
-        ) : (
-          /* Instructions View */
-          <div className="bg-gray-800 rounded-xl overflow-hidden">
-            <div className="p-4 bg-green-900/30 border-b border-green-800">
+          </div>
+        </div>
+      ) : (
+        /* Instructions View */
+        <div className="h-full flex flex-col max-w-md mx-auto">
+          <div className="bg-gray-800 overflow-hidden flex flex-col h-full">
+            <div className="p-4 bg-green-900/30 border-b border-green-800 flex-shrink-0">
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-xl font-bold">{selectedExercise?.namePl}</h2>
@@ -139,7 +139,7 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
               </div>
             </div>
 
-            <div className="p-4 space-y-6 max-h-[60vh] overflow-y-auto">
+            <div className="flex-1 overflow-y-auto p-4 space-y-6">
               {instructions && (
                 <>
                   {/* Setup */}
@@ -236,8 +236,8 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
               </button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
