@@ -35,6 +35,17 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
     }
   }, []);
 
+  // Close on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [onClose]);
+
   const validate = (): boolean => {
     const errs: string[] = [];
     if (!selectedExercise) errs.push(t.selectExercise || 'Wybierz ćwiczenie');
