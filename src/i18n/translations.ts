@@ -100,7 +100,9 @@ export interface Translations {
   };
 
   // Muscle groups
-  triceps: string;
+  triceps: {
+    goodRep: string;
+  };
 
   // Form metrics
   symmetry: string;
@@ -198,7 +200,20 @@ const translations: Record<Language, Translations> = {
       shouldersLevel: 'Równe barki',
       goodRep: 'Rotacja',
     },
-    
+
+    pushup: {
+      bodyLine: 'Ciało w linii',
+      elbowTuck: 'Łokcie blisko',
+      symmetry: 'Symetria',
+      goodRep: 'Dobra pompa',
+    },
+
+    triceps: {
+      goodRep: 'Mocne tricepsy',
+    },
+
+    symmetry: 'symetria',
+
     newVersion: 'Nowa wersja dostępna!',
     updateToSeeNew: 'Zaktualizuj aby zobaczyć nowości',
     update: 'Aktualizuj',
@@ -297,7 +312,10 @@ const translations: Record<Language, Translations> = {
       goodRep: 'Good',
     },
 
-    triceps: 'triceps',
+    triceps: {
+      goodRep: 'Strong triceps',
+    },
+
     symmetry: 'symmetry',
 
     newVersion: 'New version available!',
