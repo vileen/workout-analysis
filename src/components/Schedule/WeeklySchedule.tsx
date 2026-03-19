@@ -4,7 +4,7 @@ import { useTranslation } from '../../i18n';
 import { DayView } from './DayView';
 
 export const WeeklySchedule: React.FC = () => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
   const { schedule, clearAll } = useScheduleStore();
   const [selectedDay, setSelectedDay] = useState<DayOfWeek>('monday');
   const [showClearConfirm, setShowClearConfirm] = useState(false);

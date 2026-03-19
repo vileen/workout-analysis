@@ -69,11 +69,6 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
     onClose();
   };
 
-  const getExerciseName = (exerciseId: string): string => {
-    const ex = EXERCISES.find((e) => e.id === exerciseId);
-    return ex?.namePl || ex?.name || exerciseId;
-  };
-
   const restPresets = [30, 60, 90, 120, 180];
   const repsPresets = ['5', '6-8', '8-10', '8-12', '10-15', '12-15', '15-20', 'max'];
 
