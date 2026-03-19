@@ -25,10 +25,17 @@ class AudioFeedback {
 
     const loadVoices = () => {
       const voices = this.synth!.getVoices();
-      // Try to find Polish voice, fallback to any voice
-      this.voice = voices.find(v => v.lang.includes('pl-PL')) || 
-                   voices.find(v => v.lang.includes('pl')) ||
-                   voices[0];
+      // Select voice based on current language setting
+      if (this.language === 'en-US') {
+        this.voice = voices.find(v => v.lang.includes('en-US')) || 
+                     voices.find(v => v.lang.includes('en')) ||
+                     voices[0];
+      } else {
+        // Polish (default)
+        this.voice = voices.find(v => v.lang.includes('pl-PL')) || 
+                     voices.find(v => v.lang.includes('pl')) ||
+                     voices[0];
+      }
     };
 
     // Voices load asynchronously
@@ -157,7 +164,10 @@ class AudioFeedback {
 
   // Test audio (for settings)
   test() {
-    this.speak('Audio działa. Gotowy do treningu!', 'high');
+    const message = this.language === 'en-US' 
+      ? 'Audio is working. Ready to train!'
+      : 'Audio działa. Gotowy do treningu!';
+    this.speak(message, 'high');
   }
 }
 

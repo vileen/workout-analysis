@@ -51,7 +51,7 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday }) => {
           {exercises.length > 0 && (
             <button
               onClick={() => setShowClearConfirm(true)}
-              className="px-3 py-2 text-red-500 hover:bg-red-50 rounded-lg text-sm"
+              className="px-3 py-2 text-red-500 hover:bg-red-900/30 rounded-lg text-sm"
             >
               {t.clearDay || 'Wyczyść dzień'}
             </button>
@@ -108,7 +108,7 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday }) => {
                 </button>
                 <button
                   onClick={() => removeExerciseFromDay(day, exercise.id)}
-                  className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg"
+                  className="p-2 text-gray-500 hover:text-red-400 hover:bg-red-900/30 rounded-lg"
                   title={t.remove || 'Usuń'}
                 >
                   🗑️
@@ -141,7 +141,7 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday }) => {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowClearConfirm(false)}
-                className="flex-1 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200"
+                className="flex-1 px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 text-gray-200"
               >
                 {t.cancel || 'Anuluj'}
               </button>
@@ -160,4 +160,5 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday }) => {
       )}
     </div>
   );
+};
 };
