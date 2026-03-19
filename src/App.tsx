@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { ExerciseSelector } from './components/Exercise/ExerciseSelector';
 import { ExerciseView } from './components/Exercise/ExerciseView';
+import { WeeklySchedule } from './components/Schedule/WeeklySchedule';
 import { UpdateNotification } from './components/UpdateNotification/UpdateNotification';
 import { useServiceWorker, isStandalone } from './hooks/useServiceWorker';
 import type { Exercise } from './types/pose';
 import './App.css';
 
-type AppView = 'selector' | 'exercise' | 'summary';
+type AppView = 'selector' | 'exercise' | 'schedule';
 
 function App() {
   const [view, setView] = useState<AppView>('selector');
@@ -41,6 +42,14 @@ function App() {
     setView('selector');
   };
 
+  const handleViewSchedule = () => {
+    setView('schedule');
+  };
+
+  const handleBackToSelector = () => {
+    setView('selector');
+  };
+
   return (
     <div className="min-h-screen bg-gray-900">
       {/* Update notification */}
@@ -56,7 +65,21 @@ function App() {
       )}
       
       {view === 'selector' && (
-        <ExerciseSelector onSelect={handleExerciseSelect} />
+        <ExerciseSelector onSelect={handleExerciseSelect} onViewSchedule={handleViewSchedule} />
+      )}
+
+      {view === 'schedule' && (
+        <div className="min-h-screen bg-gray-900">
+          <div className="p-4 bg-gray-800 flex justify-end">
+            <button
+              onClick={handleBackToSelector}
+              className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors text-sm font-medium"
+            >
+              ← Wróć do ćwiczeń
+            </button>
+          </div>
+          <WeeklySchedule />
+        </div>
       )}
       
       {view === 'exercise' && currentExercise && (

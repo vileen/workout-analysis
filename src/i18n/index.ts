@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { Language, Translations } from './translations';
 import { getTranslations } from './translations';
+import { audioFeedback } from '../utils/audioFeedback';
 
 interface I18nState {
   language: Language;
@@ -18,6 +19,7 @@ export const useI18n = create<I18nState>()(
           language: lang,
           t: getTranslations(lang),
         });
+        audioFeedback.setLanguage(lang === 'pl' ? 'pl-PL' : 'en-US');
       },
       t: getTranslations('pl'),
     }),

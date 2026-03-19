@@ -7,9 +7,10 @@ import { useTranslation } from '../../i18n';
 
 interface ExerciseSelectorProps {
   onSelect: (exercise: Exercise, targetReps: number) => void;
+  onViewSchedule?: () => void;
 }
 
-export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
+export function ExerciseSelector({ onSelect, onViewSchedule }: ExerciseSelectorProps) {
   const { t, language, setLanguage } = useTranslation();
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [targetReps, setTargetReps] = useState(10);
@@ -53,9 +54,17 @@ export function ExerciseSelector({ onSelect }: ExerciseSelectorProps) {
         <div className="h-full flex flex-col max-w-md mx-auto">
           {/* Header - fixed */}
           <div className="text-center pt-6 pb-2 px-4 flex-shrink-0">
-            {/* Language selector */}
-            <div className="flex justify-end mb-2">
-              <div className="flex bg-gray-800 rounded-lg overflow-hidden">
+            {/* Language selector and Schedule button */}
+            <div className="flex justify-between items-center mb-2">
+              {onViewSchedule && (
+                <button
+                  onClick={onViewSchedule}
+                  className="px-3 py-1 text-sm font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors"
+                >
+                  📅 {t.weeklySchedule || 'Plan tygodniowy'}
+                </button>
+              )}
+              <div className="flex bg-gray-800 rounded-lg overflow-hidden ml-auto">
                 <button
                   onClick={() => setLanguage('pl')}
                   className={`px-3 py-1 text-sm font-medium transition-colors ${
