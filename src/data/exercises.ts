@@ -41,6 +41,46 @@ export const EXERCISES: Exercise[] = [
     descriptionPl: 'Rotacja tułowia z kettlebell. Nogi uniesione lub na podłodze.',
     difficulty: 'beginner',
   },
+  {
+    id: 'kettle-floor-press' as ExerciseType,
+    name: 'Kettlebell Floor Press',
+    namePl: 'Wyciskanie kettlebell leżąc',
+    description: 'Press kettlebell from floor position. Keep kettle close to chest, elbows at 45°, stabilize shoulders.',
+    descriptionPl: 'Wyciskanie kettlebell z pozycji leżącej. Trzymaj kettle blisko klatki, łokcie pod kątem 45°, stabilizuj barki.',
+    difficulty: 'beginner',
+  },
+  {
+    id: 'kettle-overhead-press' as ExerciseType,
+    name: 'Kettlebell Overhead Press',
+    namePl: 'Wyciskanie kettlebell nad głowę',
+    description: 'Press kettlebell overhead standing or seated. Keep core tight, don\'t slouch, press to full extension.',
+    descriptionPl: 'Wyciskanie kettlebell nad głowę stojąc lub siedząc. Napięty brzuch, bez garbienia, pełne wyciśnięcie.',
+    difficulty: 'intermediate',
+  },
+  {
+    id: 'pushup' as ExerciseType,
+    name: 'Push-up',
+    namePl: 'Pompki',
+    description: 'Classic push-ups (standard, diamond, or knee push-ups). Keep body in line, elbows close to torso.',
+    descriptionPl: 'Klasyczne pompki (standardowe, diamentowe lub na kolanach). Ciało w linii, łokcie przy tułowiu.',
+    difficulty: 'beginner',
+  },
+  {
+    id: 'kettle-upright-row' as ExerciseType,
+    name: 'Kettlebell Upright Row',
+    namePl: 'Wyciąganie kettlebell w górę',
+    description: 'Pull kettlebell vertically along body. Lead with elbows high, keep shoulders down (don\'t let them go to ears).',
+    descriptionPl: 'Pionowe wyciąganie kettlebell wzdłuż ciała. Łokcie wysoko, barki opuszczone (nie ciągnij do uszu).',
+    difficulty: 'beginner',
+  },
+  {
+    id: 'triceps-extension' as ExerciseType,
+    name: 'Dumbbell Triceps Extension',
+    namePl: 'Wyciskanie francuskie hantli',
+    description: 'Triceps extension with dumbbell overhead or lying. Keep core tight, don\'t let elbows drift outward.',
+    descriptionPl: 'Wyciskanie francuskie hantli nad głową lub leżąc. Napięty brzuch, nie rozchylaj łokci na zewnątrz.',
+    difficulty: 'beginner',
+  },
 ];
 
 export function getExerciseById(id: ExerciseType): Exercise | undefined {

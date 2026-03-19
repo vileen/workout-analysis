@@ -61,7 +61,11 @@ export type ExerciseType =
   | 'kettle-swing'
   | 'kettle-row'
   | 'kettle-press'
-  | 'russian-twist';
+  | 'russian-twist'
+  | 'kettle-floor-press'
+  | 'kettle-overhead-press'
+  | 'kettle-upright-row'
+  | 'triceps-extension';
 
 export interface Exercise {
   id: ExerciseType;
