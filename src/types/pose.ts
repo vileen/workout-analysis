@@ -129,3 +129,19 @@ export interface CameraSettings {
   width: number;
   height: number;
 }
+
+// Schedule types
+export type DayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+
+export interface ScheduledExercise {
+  id: string;
+  exerciseId: ExerciseType;
+  sets: number;
+  reps: string;
+  restSeconds: number;
+  notes?: string;
+}
+
+export interface WorkoutSchedule {
+  [day: string]: ScheduledExercise[];
+}

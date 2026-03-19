@@ -117,6 +117,48 @@ export interface Translations {
   exerciseNotFound: string;
   cameraAccessError: string;
   skeletonNotVisible: string;
+
+  // Schedule
+  monday: string;
+  tuesday: string;
+  wednesday: string;
+  thursday: string;
+  friday: string;
+  saturday: string;
+  sunday: string;
+  weeklySchedule: string;
+  addToSchedule: string;
+  addExercise: string;
+  editExercise: string;
+  save: string;
+  add: string;
+  remove: string;
+  edit: string;
+  cancel: string;
+  clear: string;
+  clearDay: string;
+  clearAll: string;
+  clearAllConfirm: string;
+  clearAllWarning: string;
+  clearDayConfirm: string;
+  clearDayWarning: string;
+  today: string;
+  emptyDay: string;
+  noExercises: string;
+  exercise: string;
+  exercises: string;
+  sets: string;
+  rest: string;
+  notes: string;
+  optional: string;
+  selectExercise: string;
+  minSets: string;
+  maxSets: string;
+  enterReps: string;
+  positiveRest: string;
+  repsPlaceholder: string;
+  notesPlaceholder: string;
+  addExerciseHint: string;
 }
 
 const translations: Record<Language, Translations> = {
@@ -222,6 +264,48 @@ const translations: Record<Language, Translations> = {
     exerciseNotFound: 'Nie znaleziono ćwiczenia',
     cameraAccessError: 'Brak dostępu do kamery. Upewnij się, że dałeś pozwolenie.',
     skeletonNotVisible: 'Ustaw się tak, by być widocznym w całości',
+
+    // Schedule
+    monday: 'Poniedziałek',
+    tuesday: 'Wtorek',
+    wednesday: 'Środa',
+    thursday: 'Czwartek',
+    friday: 'Piątek',
+    saturday: 'Sobota',
+    sunday: 'Niedziela',
+    weeklySchedule: 'Plan tygodniowy',
+    addToSchedule: 'Dodaj do planu',
+    addExercise: 'Dodaj ćwiczenie',
+    editExercise: 'Edytuj ćwiczenie',
+    save: 'Zapisz',
+    add: 'Dodaj',
+    remove: 'Usuń',
+    edit: 'Edytuj',
+    cancel: 'Anuluj',
+    clear: 'Wyczyść',
+    clearDay: 'Wyczyść dzień',
+    clearAll: 'Wyczyść wszystko',
+    clearAllConfirm: 'Wyczyścić cały plan?',
+    clearAllWarning: 'To usunie wszystkie zaplanowane ćwiczenia.',
+    clearDayConfirm: 'Wyczyścić dzień?',
+    clearDayWarning: 'To usunie wszystkie ćwiczenia z tego dnia.',
+    today: '(dziś)',
+    emptyDay: 'Dzień wolny',
+    noExercises: 'Brak ćwiczeń',
+    exercise: 'ćwiczenie',
+    exercises: 'ćwiczeń',
+    sets: 'serie',
+    rest: 'przerwa',
+    notes: 'Notatki',
+    optional: 'opcjonalne',
+    selectExercise: 'Wybierz ćwiczenie',
+    minSets: 'Minimum 1 seria',
+    maxSets: 'Maksimum 10 serii',
+    enterReps: 'Podaj liczbę powtórzeń',
+    positiveRest: 'Przerwa nie może być ujemna',
+    repsPlaceholder: 'Np. 8-12 lub max',
+    notesPlaceholder: 'Np. skup się na technice...',
+    addExerciseHint: 'Kliknij "Dodaj ćwiczenie" aby zaplanować trening',
   },
   
   en: {
@@ -326,6 +410,48 @@ const translations: Record<Language, Translations> = {
     exerciseNotFound: 'Exercise not found',
     cameraAccessError: 'Camera access denied. Please allow camera permission.',
     skeletonNotVisible: 'Position yourself to be fully visible',
+
+    // Schedule
+    monday: 'Monday',
+    tuesday: 'Tuesday',
+    wednesday: 'Wednesday',
+    thursday: 'Thursday',
+    friday: 'Friday',
+    saturday: 'Saturday',
+    sunday: 'Sunday',
+    weeklySchedule: 'Weekly Schedule',
+    addToSchedule: 'Add to Schedule',
+    addExercise: 'Add Exercise',
+    editExercise: 'Edit Exercise',
+    save: 'Save',
+    add: 'Add',
+    remove: 'Remove',
+    edit: 'Edit',
+    cancel: 'Cancel',
+    clear: 'Clear',
+    clearDay: 'Clear Day',
+    clearAll: 'Clear All',
+    clearAllConfirm: 'Clear entire schedule?',
+    clearAllWarning: 'This will remove all scheduled exercises.',
+    clearDayConfirm: 'Clear this day?',
+    clearDayWarning: 'This will remove all exercises from this day.',
+    today: '(today)',
+    emptyDay: 'Rest day',
+    noExercises: 'No exercises',
+    exercise: 'exercise',
+    exercises: 'exercises',
+    sets: 'sets',
+    rest: 'rest',
+    notes: 'Notes',
+    optional: 'optional',
+    selectExercise: 'Select exercise',
+    minSets: 'Minimum 1 set',
+    maxSets: 'Maximum 10 sets',
+    enterReps: 'Enter number of reps',
+    positiveRest: 'Rest cannot be negative',
+    repsPlaceholder: 'E.g. 8-12 or max',
+    notesPlaceholder: 'E.g. focus on form...',
+    addExerciseHint: 'Click "Add Exercise" to plan your workout',
   },
 };
 
