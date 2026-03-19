@@ -74,6 +74,8 @@ export interface Exercise {
   description: string;
   descriptionPl: string;
   difficulty: 'beginner' | 'intermediate' | 'advanced';
+  videoUrl?: string;
+  instructions?: ExerciseInstructions;
 }
 
 // Exercise instructions
