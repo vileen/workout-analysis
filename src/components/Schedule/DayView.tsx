@@ -30,7 +30,7 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-4">
+    <div className="bg-gray-800 rounded-lg shadow p-4">
       <div className="flex justify-between items-center mb-4">
         <div>
           <h2 className="text-xl font-semibold">
@@ -41,7 +41,7 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday }) => {
               </span>
             )}
           </h2>
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-400 text-sm">
             {exercises.length === 0
               ? t.noExercises || 'Brak ćwiczeń'
               : `${exercises.length} ${exercises.length === 1 ? t.exercise : t.exercises}`}
@@ -69,7 +69,7 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday }) => {
       </div>
 
       {exercises.length === 0 ? (
-        <div className="text-center py-12 text-gray-400">
+        <div className="text-center py-12 text-gray-500">
           <p className="text-lg mb-2">{t.emptyDay || 'Dzień wolny'}</p>
           <p className="text-sm">{t.addExerciseHint || 'Kliknij "Dodaj ćwiczenie" aby zaplanować trening'}</p>
         </div>
@@ -78,7 +78,7 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday }) => {
           {exercises.map((exercise, index) => (
             <div
               key={exercise.id}
-              className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              className="flex items-center justify-between p-3 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors"
             >
               <div className="flex items-center gap-3">
                 <span className="w-6 h-6 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full text-sm font-medium">
@@ -86,12 +86,12 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday }) => {
                 </span>
                 <div>
                   <p className="font-medium">{getExerciseName(exercise.exerciseId)}</p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-400">
                     {exercise.sets} {t.sets || 'serii'} × {exercise.reps} {t.reps || 'powt.'}
                     {exercise.restSeconds > 0 && ` • ${t.rest || 'przerwa'} ${formatRest(exercise.restSeconds)}`}
                   </p>
                   {exercise.notes && (
-                    <p className="text-xs text-gray-400 mt-1">{exercise.notes}</p>
+                    <p className="text-xs text-gray-500 mt-1">{exercise.notes}</p>
                   )}
                 </div>
               </div>
@@ -101,7 +101,7 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday }) => {
                     setEditingExercise(exercise);
                     setShowAddModal(true);
                   }}
-                  className="p-2 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg"
+                  className="p-2 text-gray-500 hover:text-blue-400 hover:bg-blue-900/30 rounded-lg"
                   title={t.edit || 'Edytuj'}
                 >
                   ✏️
@@ -131,11 +131,11 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday }) => {
       {/* Clear confirmation */}
       {showClearConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-sm mx-4">
-            <h3 className="text-lg font-semibold mb-2">
+          <div className="bg-gray-800 rounded-lg p-6 max-w-sm mx-4">
+            <h3 className="text-lg font-semibold mb-2 text-gray-100">
               {t.clearDayConfirm || 'Wyczyścić dzień?'}
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-300 mb-4">
               {t.clearDayWarning?.replace('{day}', dayName) || `To usunie wszystkie ćwiczenia z ${dayName}.`}
             </p>
             <div className="flex gap-3">
@@ -160,5 +160,4 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday }) => {
       )}
     </div>
   );
-};
 };

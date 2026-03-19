@@ -74,16 +74,16 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
+      <div className="bg-gray-800 rounded-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
         <div className="p-6">
-          <h2 className="text-xl font-semibold mb-4">
+          <h2 className="text-xl font-semibold mb-4 text-gray-100">
             {isEditing ? t.editExercise || 'Edytuj ćwiczenie' : t.addToSchedule || 'Dodaj do planu'}
           </h2>
 
           {errors.length > 0 && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
+            <div className="bg-red-900/30 border border-red-800/50 rounded-lg p-3 mb-4">
               {errors.map((err, i) => (
-                <p key={i} className="text-red-600 text-sm">{err}</p>
+                <p key={i} className="text-red-400 text-sm">{err}</p>
               ))}
             </div>
           )}
@@ -91,18 +91,18 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
           <div className="space-y-4">
             {/* Exercise selection */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-200 mb-1">
                 {t.exercise || 'Ćwiczenie'}
               </label>
               <select
                 value={selectedExercise}
                 onChange={(e) => setSelectedExercise(e.target.value)}
-                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-white"
                 disabled={isEditing}
               >
-                <option value="">{t.selectExercise || 'Wybierz ćwiczenie...'}</option>
+                <option value="" className="bg-gray-700">{t.selectExercise || 'Wybierz ćwiczenie...'}</option>
                 {availableExercises.map((ex) => (
-                  <option key={ex.id} value={ex.id}>
+                  <option key={ex.id} value={ex.id} className="bg-gray-700">
                     {ex.namePl || ex.name}
                   </option>
                 ))}
@@ -111,20 +111,20 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
 
             {/* Sets */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-200 mb-1">
                 {t.sets || 'Serie'}
               </label>
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setSets(Math.max(1, sets - 1))}
-                  className="w-10 h-10 bg-gray-100 rounded-lg hover:bg-gray-200 font-medium"
+                  className="w-10 h-10 bg-gray-700 rounded-lg hover:bg-gray-600 font-medium text-gray-200"
                 >
                   −
                 </button>
-                <span className="w-12 text-center font-medium">{sets}</span>
+                <span className="w-12 text-center font-medium text-gray-200">{sets}</span>
                 <button
                   onClick={() => setSets(Math.min(10, sets + 1))}
-                  className="w-10 h-10 bg-gray-100 rounded-lg hover:bg-gray-200 font-medium"
+                  className="w-10 h-10 bg-gray-700 rounded-lg hover:bg-gray-600 font-medium text-gray-200"
                 >
                   +
                 </button>
@@ -133,7 +133,7 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
 
             {/* Reps */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-200 mb-1">
                 {t.reps || 'Powtórzenia'}
               </label>
               <div className="flex flex-wrap gap-2 mb-2">
@@ -144,7 +144,7 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
                     className={`px-3 py-1 rounded-lg text-sm ${
                       reps === preset
                         ? 'bg-blue-500 text-white'
-                        : 'bg-gray-100 hover:bg-gray-200'
+                        : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
                     }`}
                   >
                     {preset}
@@ -156,13 +156,13 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
                 value={reps}
                 onChange={(e) => setReps(e.target.value)}
                 placeholder={t.repsPlaceholder || 'Np. 8-12 lub max'}
-                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white"
               />
             </div>
 
             {/* Rest */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-200 mb-1">
                 {t.rest || 'Przerwa między seriami'}
               </label>
               <div className="flex flex-wrap gap-2 mb-2">
@@ -173,7 +173,7 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
                     className={`px-3 py-1 rounded-lg text-sm ${
                       restSeconds === preset
                         ? 'bg-blue-500 text-white'
-                        : 'bg-gray-100 hover:bg-gray-200'
+                        : 'bg-gray-700 hover:bg-gray-600 text-gray-200'
                     }`}
                   >
                     {preset < 60 ? `${preset}s` : `${preset / 60}min`}
@@ -186,13 +186,13 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
                 onChange={(e) => setRestSeconds(parseInt(e.target.value) || 0)}
                 min={0}
                 max={600}
-                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white"
               />
             </div>
 
             {/* Notes */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-200 mb-1">
                 {t.notes || 'Notatki'} ({t.optional || 'opcjonalne'})
               </label>
               <textarea
@@ -200,7 +200,7 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder={t.notesPlaceholder || 'Np. skup się na technice...'}
                 rows={2}
-                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 resize-none"
+                className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 resize-none bg-gray-700 text-white"
               />
             </div>
           </div>
@@ -209,7 +209,7 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
           <div className="flex gap-3 mt-6">
             <button
               onClick={onClose}
-              className="flex-1 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200"
+              className="flex-1 px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 text-gray-200"
             >
               {t.cancel || 'Anuluj'}
             </button>

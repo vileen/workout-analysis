@@ -55,13 +55,13 @@ export const WeeklySchedule: React.FC = () => {
               onClick={() => setSelectedDay(day)}
               className={`
                 px-4 py-2 rounded-lg whitespace-nowrap font-medium transition-colors
-                ${isSelected ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-gray-200'}
+                ${isSelected ? 'bg-blue-500 text-white' : 'bg-gray-700 hover:bg-gray-600'}
                 ${isToday && !isSelected ? 'ring-2 ring-blue-300' : ''}
               `}
             >
               <span>{dayNames[day]}</span>
               {exerciseCount > 0 && (
-                <span className={`ml-2 text-xs ${isSelected ? 'text-blue-100' : 'text-gray-500'}`}>
+                <span className={`ml-2 text-xs ${isSelected ? 'text-blue-100' : 'text-gray-400'}`}>
                   ({exerciseCount})
                 </span>
               )}
@@ -91,7 +91,7 @@ export const WeeklySchedule: React.FC = () => {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowClearConfirm(false)}
-                className="flex-1 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200"
+                className="flex-1 px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 text-gray-200"
               >
                 {t.cancel || 'Anuluj'}
               </button>
