@@ -4,7 +4,6 @@ import {
   calculateJointAngle,
   calculateTorsoAngle, 
   areAllVisible,
-  getAverage,
 } from '../utils/math';
 
 // Kettle overhead press criteria

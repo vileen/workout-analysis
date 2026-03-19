@@ -90,7 +90,21 @@ export interface Translations {
     shouldersLevel: string;
     goodRep: string;
   };
-  
+
+  // Form cues - Pushup
+  pushup: {
+    bodyLine: string;
+    elbowTuck: string;
+    symmetry: string;
+    goodRep: string;
+  };
+
+  // Muscle groups
+  triceps: string;
+
+  // Form metrics
+  symmetry: string;
+
   // Update notification
   newVersion: string;
   updateToSeeNew: string;
@@ -275,7 +289,17 @@ const translations: Record<Language, Translations> = {
       shouldersLevel: 'Level shoulders',
       goodRep: 'Rotation',
     },
-    
+
+    pushup: {
+      bodyLine: 'Body in line',
+      elbowTuck: 'Elbows close',
+      symmetry: 'Symmetry',
+      goodRep: 'Good',
+    },
+
+    triceps: 'triceps',
+    symmetry: 'symmetry',
+
     newVersion: 'New version available!',
     updateToSeeNew: 'Update to see new features',
     update: 'Update',
@@ -289,4 +313,6 @@ const translations: Record<Language, Translations> = {
 
 export function getTranslations(lang: Language): Translations {
   return translations[lang];
+}
+ons[lang];
 }

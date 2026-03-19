@@ -2,7 +2,6 @@ import type { Pose, FormAnalysis, RepState } from '../types/pose';
 import { POSE_LANDMARKS } from '../types/pose';
 import { 
   calculateJointAngle,
-  calculateTorsoAngle, 
   areAllVisible,
   getAverage,
   checkSymmetry,
