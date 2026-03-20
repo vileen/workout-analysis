@@ -21,7 +21,7 @@ export const useI18n = create<I18nState>()(
         });
         audioFeedback.setLanguage(lang === 'pl' ? 'pl-PL' : 'en-US');
       },
-      t: getTranslations('pl'),
+      t: getTranslations('en'),
     }),
     {
       name: 'language-storage',
@@ -40,3 +40,4 @@ export function useTranslation() {
   const { t, language, setLanguage } = useI18n();
   return { t, language, setLanguage };
 }
+

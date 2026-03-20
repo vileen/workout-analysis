@@ -222,7 +222,7 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
               onClick={onClose}
               className="flex-1 px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 text-gray-200"
             >
-              {t.cancel || 'Anuluj'}
+              {t.cancel || 'Cancel'}
             </button>
             <button
               onClick={handleSubmit}
