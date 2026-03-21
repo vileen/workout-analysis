@@ -8,9 +8,10 @@ interface DayViewProps {
   day: DayOfWeek;
   dayName: string;
   isToday: boolean;
+  onStartWorkout?: (day: DayOfWeek) => void;
 }
 
-export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday }) => {
+export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday, onStartWorkout }) => {
   const { t } = useTranslation();
   const { schedule, removeExerciseFromDay, clearDay } = useScheduleStore();
   const [showAddModal, setShowAddModal] = useState(false);
@@ -49,12 +50,22 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday }) => {
         </div>
         <div className="flex gap-2">
           {exercises.length > 0 && (
-            <button
-              onClick={() => setShowClearConfirm(true)}
-              className="px-3 py-2 text-red-500 hover:bg-red-900/30 rounded-lg text-sm"
-            >
-              {t.clearDay || 'Wyczyść dzień'}
-            </button>
+            <>
+              <button
+                onClick={() => setShowClearConfirm(true)}
+                className="px-3 py-2 text-red-500 hover:bg-red-900/30 rounded-lg text-sm"
+              >
+                {t.clearDay || 'Wyczyść dzień'}
+              </button>
+              {onStartWorkout && (
+                <button
+                  onClick={() => onStartWorkout(day)}
+                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 text-sm font-medium flex items-center gap-2"
+                >
+                  ▶ {t.startWorkout || 'Rozpocznij trening'}
+                </button>
+              )}
+            </>
           )}
           <button
             onClick={() => {

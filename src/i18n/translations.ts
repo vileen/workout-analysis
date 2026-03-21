@@ -159,6 +159,16 @@ export interface Translations {
   repsPlaceholder: string;
   notesPlaceholder: string;
   addExerciseHint: string;
+
+  // Scheduled workout
+  completedExercises: string;
+  greatJob: string;
+  finish: string;
+  noExercisesFound: string;
+  back: string;
+  cancelWorkout: string;
+  previous: string;
+  skip: string;
 }
 
 const translations: Record<Language, Translations> = {
@@ -306,6 +316,16 @@ const translations: Record<Language, Translations> = {
     repsPlaceholder: 'Np. 8-12 lub max',
     notesPlaceholder: 'Np. skup się na technice...',
     addExerciseHint: 'Kliknij "Dodaj ćwiczenie" aby zaplanować trening',
+
+    // Scheduled workout
+    completedExercises: 'Ukończono {count} ćwiczeń',
+    greatJob: 'Świetna robota!',
+    finish: 'Zakończ',
+    noExercisesFound: 'Nie znaleziono ćwiczeń',
+    back: 'Wróć',
+    cancelWorkout: 'Anuluj',
+    previous: 'Poprzednie',
+    skip: 'Pomiń',
   },
   
   en: {
@@ -452,6 +472,16 @@ const translations: Record<Language, Translations> = {
     repsPlaceholder: 'E.g. 8-12 or max',
     notesPlaceholder: 'E.g. focus on form...',
     addExerciseHint: 'Click "Add Exercise" to plan your workout',
+
+    // Scheduled workout
+    completedExercises: 'Completed {count} exercises',
+    greatJob: 'Great job!',
+    finish: 'Finish',
+    noExercisesFound: 'No exercises found',
+    back: 'Back',
+    cancelWorkout: 'Cancel',
+    previous: 'Previous',
+    skip: 'Skip',
   },
 };
 

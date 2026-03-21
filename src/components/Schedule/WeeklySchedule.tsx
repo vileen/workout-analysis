@@ -3,7 +3,11 @@ import { useScheduleStore, DAYS_OF_WEEK, type DayOfWeek } from '../../stores/sch
 import { useTranslation } from '../../i18n';
 import { DayView } from './DayView';
 
-export const WeeklySchedule: React.FC = () => {
+interface WeeklyScheduleProps {
+  onStartWorkout?: (day: DayOfWeek) => void;
+}
+
+export const WeeklySchedule: React.FC<WeeklyScheduleProps> = ({ onStartWorkout }) => {
   const { t } = useTranslation();
   const { schedule, clearAll } = useScheduleStore();
   const [selectedDay, setSelectedDay] = useState<DayOfWeek>('monday');
@@ -76,7 +80,7 @@ export const WeeklySchedule: React.FC = () => {
       </div>
 
       {/* Day view */}
-      <DayView day={selectedDay} dayName={dayNames[selectedDay]} isToday={selectedDay === today} />
+      <DayView day={selectedDay} dayName={dayNames[selectedDay]} isToday={selectedDay === today} onStartWorkout={onStartWorkout} />
 
       {/* Clear confirmation modal */}
       {showClearConfirm && (

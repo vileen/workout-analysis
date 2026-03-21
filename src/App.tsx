@@ -2,17 +2,20 @@ import { useState, useEffect } from 'react';
 import { ExerciseSelector } from './components/Exercise/ExerciseSelector';
 import { ExerciseView } from './components/Exercise/ExerciseView';
 import { WeeklySchedule } from './components/Schedule/WeeklySchedule';
+import { ScheduledWorkout } from './components/Schedule/ScheduledWorkout';
 import { UpdateNotification } from './components/UpdateNotification/UpdateNotification';
 import { useServiceWorker, isStandalone } from './hooks/useServiceWorker';
+import type { DayOfWeek } from './stores/scheduleStore';
 import type { Exercise } from './types/pose';
 import './App.css';
 
-type AppView = 'selector' | 'exercise' | 'schedule';
+type AppView = 'selector' | 'exercise' | 'schedule' | 'scheduled-workout';
 
 function App() {
   const [view, setView] = useState<AppView>('selector');
   const [currentExercise, setCurrentExercise] = useState<Exercise | null>(null);
   const [targetReps, setTargetReps] = useState(10);
+  const [scheduledWorkoutDay, setScheduledWorkoutDay] = useState<DayOfWeek | null>(null);
   const [isPwa, setIsPwa] = useState(false);
   
   useServiceWorker(); // Registers service worker and handles updates
@@ -50,6 +53,21 @@ function App() {
     setView('selector');
   };
 
+  const handleStartScheduledWorkout = (day: DayOfWeek) => {
+    setScheduledWorkoutDay(day);
+    setView('scheduled-workout');
+  };
+
+  const handleScheduledWorkoutFinish = () => {
+    setScheduledWorkoutDay(null);
+    setView('schedule');
+  };
+
+  const handleScheduledWorkoutCancel = () => {
+    setScheduledWorkoutDay(null);
+    setView('schedule');
+  };
+
   return (
     <div className="min-h-screen bg-gray-900">
       {/* Update notification */}
@@ -78,8 +96,16 @@ function App() {
               ← Wróć do ćwiczeń
             </button>
           </div>
-          <WeeklySchedule />
+          <WeeklySchedule onStartWorkout={handleStartScheduledWorkout} />
         </div>
+      )}
+
+      {view === 'scheduled-workout' && scheduledWorkoutDay && (
+        <ScheduledWorkout
+          day={scheduledWorkoutDay}
+          onFinish={handleScheduledWorkoutFinish}
+          onCancel={handleScheduledWorkoutCancel}
+        />
       )}
       
       {view === 'exercise' && currentExercise && (
