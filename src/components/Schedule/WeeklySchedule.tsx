@@ -7,10 +7,16 @@ interface WeeklyScheduleProps {
   onStartWorkout?: (day: DayOfWeek) => void;
 }
 
+const getToday = (): DayOfWeek => {
+  const day = new Date().getDay();
+  const map: DayOfWeek[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  return map[day];
+};
+
 export const WeeklySchedule: React.FC<WeeklyScheduleProps> = ({ onStartWorkout }) => {
   const { t } = useTranslation();
   const { schedule, clearAll } = useScheduleStore();
-  const [selectedDay, setSelectedDay] = useState<DayOfWeek>('monday');
+  const [selectedDay, setSelectedDay] = useState<DayOfWeek>(getToday());
   const [showClearConfirm, setShowClearConfirm] = useState(false);
 
   const dayNames: Record<DayOfWeek, string> = {
@@ -21,12 +27,6 @@ export const WeeklySchedule: React.FC<WeeklyScheduleProps> = ({ onStartWorkout }
     friday: t.friday || 'Piątek',
     saturday: t.saturday || 'Sobota',
     sunday: t.sunday || 'Niedziela',
-  };
-
-  const getToday = (): DayOfWeek => {
-    const day = new Date().getDay();
-    const map: DayOfWeek[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    return map[day];
   };
 
   const today = getToday();
