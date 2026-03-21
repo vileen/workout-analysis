@@ -25,8 +25,13 @@ export function CameraFeed({ onPoseDetected, showSkeleton = true }: CameraFeedPr
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [zoom, setZoom] = useState(1);
   const poseRef = useRef<any>(null);
   const cameraRef = useRef<any>(null);
+
+  const handleZoomIn = () => setZoom(prev => Math.min(prev + 0.2, 2));
+  const handleZoomOut = () => setZoom(prev => Math.max(prev - 0.2, 0.5));
+  const handleResetZoom = () => setZoom(1);
 
   // Load MediaPipe scripts
   useEffect(() => {
@@ -165,16 +170,41 @@ export function CameraFeed({ onPoseDetected, showSkeleton = true }: CameraFeedPr
       
       <video
         ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ transform: 'scaleX(-1)' }}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-200"
+        style={{ transform: `scaleX(-1) scale(${zoom})` }}
         playsInline
       />
       
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ transform: 'scaleX(-1)' }}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-200"
+        style={{ transform: `scaleX(-1) scale(${zoom})` }}
       />
+      
+      {/* Zoom controls */}
+      <div className="absolute bottom-4 right-4 flex flex-col gap-2 z-20">
+        <button
+          onClick={handleZoomIn}
+          className="w-10 h-10 bg-black/70 text-white rounded-full flex items-center justify-center hover:bg-black/90 transition-colors"
+          title="Przybliż"
+        >
+          +
+        </button>
+        <button
+          onClick={handleResetZoom}
+          className="w-10 h-10 bg-black/70 text-white rounded-full flex items-center justify-center hover:bg-black/90 transition-colors text-xs"
+          title="Reset zoom"
+        >
+          {Math.round(zoom * 100)}%
+        </button>
+        <button
+          onClick={handleZoomOut}
+          className="w-10 h-10 bg-black/70 text-white rounded-full flex items-center justify-center hover:bg-black/90 transition-colors"
+          title="Oddal"
+        >
+          −
+        </button>
+      </div>
       
       {/* Overlay instructions */}
       <div className="absolute top-4 left-4 bg-black/50 text-white px-3 py-2 rounded text-sm">
