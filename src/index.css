@@ -85,3 +85,15 @@ input, textarea {
     padding-bottom: env(safe-area-inset-bottom);
   }
 }
+
+/* Fix for mobile browser bottom navigation bars */
+@supports (height: 100dvh) {
+  .h-screen {
+    height: 100dvh;
+  }
+}
+
+/* Additional padding for bottom safe area on mobile */
+.safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 20px);
+}

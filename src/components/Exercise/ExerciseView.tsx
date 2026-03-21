@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { CameraFeed } from '../Camera/CameraFeed';
 import type { Pose, Rep } from '../../types/pose';
 import { useWorkoutStore } from '../../stores/workoutStore';
@@ -111,9 +111,15 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
     };
   }, [exercise, targetReps, startExercise, endExercise, audioEnabled]);
 
+  // Use ref to track isActive to avoid stale closure issues
+  const isActiveRef = useRef(isActive);
+  useEffect(() => {
+    isActiveRef.current = isActive;
+  }, [isActive]);
+
   // Handle pose detection based on exercise type
   const handlePoseDetected = useCallback((pose: Pose) => {
-    if (!isActive || !exercise || !exerciseState) return;
+    if (!isActiveRef.current || !exercise || !exerciseState) return;
 
     let formAnalysis;
     let newState: ExerciseState;
@@ -218,7 +224,7 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
         }
       }
     }
-  }, [isActive, exercise, exerciseState, lastRepTime, addRep, updateFormFeedback]);
+  }, [exercise, exerciseState, lastRepTime, addRep, updateFormFeedback]);
 
   // Auto-finish when target reached
   useEffect(() => {

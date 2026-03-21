@@ -15,11 +15,11 @@ declare global {
 
 interface CameraFeedProps {
   onPoseDetected: (pose: AppPose) => void;
-  isActive: boolean;
+  isActive?: boolean; // Kept for API compatibility, but camera always runs
   showSkeleton?: boolean;
 }
 
-export function CameraFeed({ onPoseDetected, isActive, showSkeleton = true }: CameraFeedProps) {
+export function CameraFeed({ onPoseDetected, showSkeleton = true }: CameraFeedProps) {
   const { t } = useTranslation();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -121,11 +121,12 @@ export function CameraFeed({ onPoseDetected, isActive, showSkeleton = true }: Ca
     
     poseRef.current = pose;
     
-    // Start camera
+    // Start camera immediately - don't wait for isActive
     if (window.Camera) {
       const camera = new window.Camera(videoRef.current, {
         onFrame: async () => {
-          if (isActive && poseRef.current) {
+          // Always process frames, let parent component decide if active
+          if (poseRef.current && videoRef.current) {
             await poseRef.current.send({ image: videoRef.current });
           }
         },
@@ -134,8 +135,9 @@ export function CameraFeed({ onPoseDetected, isActive, showSkeleton = true }: Ca
       });
       
       cameraRef.current = camera;
-      camera.start().catch(() => {
-        setError('Brak dostępu do kamery');
+      camera.start().catch((err: any) => {
+        console.error('Camera error:', err);
+        setError(t.cameraAccessError || 'Brak dostępu do kamery. Sprawdź uprawnienia.');
       });
     }
     
@@ -143,7 +145,7 @@ export function CameraFeed({ onPoseDetected, isActive, showSkeleton = true }: Ca
       pose.close();
       cameraRef.current?.stop();
     };
-  }, [isLoading, isActive, onPoseDetected, showSkeleton]);
+  }, [isLoading, onPoseDetected, showSkeleton, t]);
 
   if (error) {
     return (
