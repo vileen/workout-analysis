@@ -53,7 +53,7 @@ export function ExerciseSelector({ onSelect, onViewSchedule }: ExerciseSelectorP
       {!showInstructions ? (
         <div className="h-full flex flex-col max-w-md mx-auto">
           {/* Header - fixed */}
-          <div className="text-center pt-6 pb-2 px-4 flex-shrink-0">
+          <div className="text-center pt-[env(safe-area-inset-top)] pb-2 px-4 flex-shrink-0">
             {/* Language selector and Schedule button */}
             <div className="flex justify-between items-center mb-2">
               {onViewSchedule && (

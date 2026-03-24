@@ -90,7 +90,7 @@ export const ScheduledWorkout: React.FC<ScheduledWorkoutProps> = ({
   return (
     <div className="flex flex-col h-screen bg-gray-900">
       {/* Progress header */}
-      <div className="bg-gray-800 p-4 safe-top">
+      <div className="bg-gray-800 pt-[env(safe-area-inset-top)] p-4">
         <div className="flex items-center justify-between mb-4">
           <button
             onClick={onCancel}

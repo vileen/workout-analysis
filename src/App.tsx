@@ -88,7 +88,7 @@ function App() {
 
       {view === 'schedule' && (
         <div className="h-screen flex flex-col bg-gray-900 overflow-hidden">
-          <div className="p-4 bg-gray-800 flex justify-end flex-shrink-0">
+          <div className="pt-[env(safe-area-inset-top)] p-4 bg-gray-800 flex justify-end flex-shrink-0">
             <button
               onClick={handleBackToSelector}
               className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors text-sm font-medium"
