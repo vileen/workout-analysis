@@ -162,7 +162,7 @@ export function ExerciseSelector({ onSelect, onViewSchedule }: ExerciseSelectorP
         /* Instructions View */
         <div className="h-full flex flex-col max-w-md mx-auto">
           <div className="bg-gray-800 overflow-hidden flex flex-col h-full">
-            <div className="p-4 bg-green-900/30 border-b border-green-800 flex-shrink-0">
+            <div className="pt-[env(safe-area-inset-top)] p-4 bg-green-900/30 border-b border-green-800 flex-shrink-0">
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-xl font-bold">{language === 'pl' ? selectedExercise?.namePl : selectedExercise?.name}</h2>

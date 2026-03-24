@@ -403,7 +403,7 @@ export function ExerciseView({ exerciseId, targetReps, onFinish }: ExerciseViewP
   return (
     <div className="flex flex-col h-screen bg-gray-900 text-white">
       {/* Header */}
-      <div className="flex items-center justify-between pt-[env(safe-area-inset-top)] p-4 bg-gray-800">
+      <div className="flex items-center justify-between pt-[env(safe-area-inset-top)] px-4 py-2 bg-gray-800">
         <div>
           <h1 className="text-xl font-bold">{language === 'pl' ? exercise.namePl : exercise.name}</h1>
           <p className="text-sm text-gray-400">{language === 'pl' ? exercise.name : exercise.namePl}</p>
