@@ -13,7 +13,7 @@ interface I18nState {
 export const useI18n = create<I18nState>()(
   persist(
     (set) => ({
-      language: 'pl', // Polish as default
+      language: 'en', // English as default
       setLanguage: (lang: Language) => {
         set({ 
           language: lang,
@@ -29,6 +29,7 @@ export const useI18n = create<I18nState>()(
         // Rehydrate translations when store is loaded from storage
         if (state) {
           state.t = getTranslations(state.language);
+          audioFeedback.setLanguage(state.language === 'pl' ? 'pl-PL' : 'en-US');
         }
       },
     }

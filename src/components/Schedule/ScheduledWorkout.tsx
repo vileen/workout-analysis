@@ -15,7 +15,7 @@ export const ScheduledWorkout: React.FC<ScheduledWorkoutProps> = ({
   onFinish,
   onCancel,
 }) => {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const { schedule } = useScheduleStore();
   const exercises = schedule[day] || [];
 
@@ -114,7 +114,9 @@ export const ScheduledWorkout: React.FC<ScheduledWorkoutProps> = ({
         {/* Exercise info */}
         <div className="mt-4 text-center">
           <h2 className="text-xl font-bold">
-            {currentExercise.namePl || currentExercise.name}
+            {language === 'pl' 
+              ? (currentExercise.namePl || currentExercise.name)
+              : (currentExercise.name || currentExercise.namePl)}
           </h2>
           <p className="text-gray-400 text-sm">
             {currentScheduledExercise.sets} {t.sets || 'serii'} × {currentScheduledExercise.reps} {t.reps || 'powt.'}

@@ -12,7 +12,7 @@ interface DayViewProps {
 }
 
 export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday, onStartWorkout }) => {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const { schedule, removeExerciseFromDay, clearDay } = useScheduleStore();
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingExercise, setEditingExercise] = useState<ScheduledExercise | null>(null);
@@ -22,7 +22,9 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday, onStart
 
   const getExerciseName = (exerciseId: string): string => {
     const exercise = EXERCISES.find((e) => e.id === exerciseId);
-    return exercise?.namePl || exercise?.name || exerciseId;
+    return language === 'pl' 
+      ? (exercise?.namePl || exercise?.name || exerciseId)
+      : (exercise?.name || exercise?.namePl || exerciseId);
   };
 
   const formatRest = (seconds: number): string => {

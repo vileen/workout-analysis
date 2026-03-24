@@ -65,7 +65,10 @@ export type ExerciseType =
   | 'kettle-floor-press'
   | 'kettle-overhead-press'
   | 'kettle-upright-row'
-  | 'triceps-extension';
+  | 'triceps-extension'
+  | 'pullup'
+  | 'bicep-curl'
+  | 'kettle-bicep-curl';
 
 export interface Exercise {
   id: ExerciseType;

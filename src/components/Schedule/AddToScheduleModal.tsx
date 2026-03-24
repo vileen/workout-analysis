@@ -14,7 +14,7 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
   exercise,
   onClose,
 }) => {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const { addExerciseToDay, updateExercise } = useScheduleStore();
   const isEditing = !!exercise;
 
@@ -114,7 +114,7 @@ export const AddToScheduleModal: React.FC<AddToScheduleModalProps> = ({
                 <option value="" className="bg-gray-700">{t.selectExercise || 'Wybierz ćwiczenie...'}</option>
                 {availableExercises.map((ex) => (
                   <option key={ex.id} value={ex.id} className="bg-gray-700">
-                    {ex.namePl || ex.name}
+                    {language === 'pl' ? (ex.namePl || ex.name) : (ex.name || ex.namePl)}
                   </option>
                 ))}
               </select>
