@@ -168,18 +168,31 @@ export function CameraFeed({ onPoseDetected, showSkeleton = true }: CameraFeedPr
         </div>
       )}
       
-      <video
-        ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-200"
-        style={{ transform: `scaleX(-1) scale(${zoom})` }}
-        playsInline
-      />
-      
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-200"
-        style={{ transform: `scaleX(-1) scale(${zoom})` }}
-      />
+      {/* Video wrapper for proper zoom */}
+      <div 
+        className="absolute inset-0 overflow-hidden"
+        style={{
+          transform: `scale(${zoom})`,
+          transformOrigin: 'center center',
+          width: `${100 / zoom}%`,
+          height: `${100 / zoom}%`,
+          left: `${50 - 50 / zoom}%`,
+          top: `${50 - 50 / zoom}%`,
+        }}
+      >
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ transform: 'scaleX(-1)' }}
+          playsInline
+        />
+        
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ transform: 'scaleX(-1)' }}
+        />
+      </div>
       
       {/* Zoom controls */}
       <div className="absolute bottom-4 right-4 flex flex-col gap-2 z-20">
