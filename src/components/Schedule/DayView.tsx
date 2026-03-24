@@ -34,7 +34,7 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday, onStart
 
   return (
     <div className="bg-gray-800 rounded-lg shadow p-4">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4">
         <div>
           <h2 className="text-xl font-semibold">
             {dayName}
@@ -50,21 +50,22 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday, onStart
               : `${exercises.length} ${exercises.length === 1 ? t.exercise : t.exercises}`}
           </p>
         </div>
-        <div className="flex gap-2 flex-wrap justify-end">
+        <div className="flex gap-2 flex-wrap sm:flex-nowrap">
           {exercises.length > 0 && (
             <>
               <button
                 onClick={() => setShowClearConfirm(true)}
-                className="px-3 py-2 text-red-500 hover:bg-red-900/30 rounded-lg text-sm whitespace-nowrap"
+                className="px-2 sm:px-3 py-2 text-red-500 hover:bg-red-900/30 rounded-lg text-xs sm:text-sm whitespace-nowrap"
               >
                 {t.clearDay || 'Wyczyść dzień'}
               </button>
               {onStartWorkout && (
                 <button
                   onClick={() => onStartWorkout(day)}
-                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 text-sm font-medium flex items-center gap-2 whitespace-nowrap"
+                  className="px-3 sm:px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 text-xs sm:text-sm font-medium flex items-center gap-1 sm:gap-2 whitespace-nowrap"
                 >
-                  ▶ {t.startWorkout || 'Rozpocznij trening'}
+                  ▶ <span className="hidden sm:inline">{t.startWorkout || 'Rozpocznij trening'}</span>
+                  <span className="sm:hidden">{t.startWorkout?.split(' ')[0] || 'Start'}</span>
                 </button>
               )}
             </>
@@ -74,9 +75,10 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday, onStart
               setEditingExercise(null);
               setShowAddModal(true);
             }}
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-sm font-medium whitespace-nowrap"
+            className="px-3 sm:px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-xs sm:text-sm font-medium whitespace-nowrap"
           >
-            {t.addExercise || 'Dodaj ćwiczenie'}
+            <span className="hidden sm:inline">{t.addExercise || 'Dodaj ćwiczenie'}</span>
+            <span className="sm:hidden">+ {t.exercise || 'Ćwiczenie'}</span>
           </button>
         </div>
       </div>
