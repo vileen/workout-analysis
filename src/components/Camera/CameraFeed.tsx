@@ -27,11 +27,42 @@ export function CameraFeed({ onPoseDetected, showSkeleton = true }: CameraFeedPr
   const [isLoading, setIsLoading] = useState(true);
   const [zoom, setZoom] = useState(1);
   const poseRef = useRef<any>(null);
-  const cameraRef = useRef<any>(null);
 
-  const handleZoomIn = () => setZoom(prev => Math.min(prev + 0.2, 2));
-  const handleZoomOut = () => setZoom(prev => Math.max(prev - 0.2, 0.5));
-  const handleResetZoom = () => setZoom(1);
+  const handleZoomIn = () => {
+    const newZoom = Math.min(zoom + 0.2, 3);
+    setZoom(newZoom);
+    applyCameraZoom(newZoom);
+  };
+  const handleZoomOut = () => {
+    const newZoom = Math.max(zoom - 0.2, 1);
+    setZoom(newZoom);
+    applyCameraZoom(newZoom);
+  };
+  const handleResetZoom = () => {
+    setZoom(1);
+    applyCameraZoom(1);
+  };
+
+  const applyCameraZoom = async (zoomLevel: number) => {
+    const video = videoRef.current;
+    if (!video || !video.srcObject) return;
+    
+    const stream = video.srcObject as MediaStream;
+    const track = stream.getVideoTracks()[0];
+    if (!track) return;
+
+    const capabilities = track.getCapabilities() as any;
+    if (capabilities.zoom) {
+      try {
+        const constraints: any = {
+          advanced: [{ zoom: zoomLevel }]
+        };
+        await track.applyConstraints(constraints);
+      } catch (err) {
+        console.log('Hardware zoom not supported');
+      }
+    }
+  };
 
   // Load MediaPipe scripts
   useEffect(() => {
@@ -126,29 +157,46 @@ export function CameraFeed({ onPoseDetected, showSkeleton = true }: CameraFeedPr
     
     poseRef.current = pose;
     
-    // Start camera immediately - don't wait for isActive
-    if (window.Camera) {
-      const camera = new window.Camera(videoRef.current, {
-        onFrame: async () => {
-          // Always process frames, let parent component decide if active
-          if (poseRef.current && videoRef.current) {
+    // Start camera with getUserMedia for zoom support
+    const startCamera = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: 'environment',
+            width: { ideal: 1920 },
+            height: { ideal: 1080 },
+          }
+        });
+        
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+          await videoRef.current.play();
+        }
+        
+        // Start pose detection loop
+        const detectPose = async () => {
+          if (poseRef.current && videoRef.current && videoRef.current.readyState >= 2) {
             await poseRef.current.send({ image: videoRef.current });
           }
-        },
-        width: 1280,
-        height: 720,
-      });
-      
-      cameraRef.current = camera;
-      camera.start().catch((err: any) => {
+          requestAnimationFrame(detectPose);
+        };
+        detectPose();
+        
+      } catch (err) {
         console.error('Camera error:', err);
         setError(t.cameraAccessError || 'Brak dostępu do kamery. Sprawdź uprawnienia.');
-      });
-    }
+      }
+    };
+    
+    startCamera();
     
     return () => {
       pose.close();
-      cameraRef.current?.stop();
+      // Stop all tracks
+      if (videoRef.current?.srcObject) {
+        const stream = videoRef.current.srcObject as MediaStream;
+        stream.getTracks().forEach(track => track.stop());
+      }
     };
   }, [isLoading, onPoseDetected, showSkeleton, t]);
 
@@ -168,31 +216,19 @@ export function CameraFeed({ onPoseDetected, showSkeleton = true }: CameraFeedPr
         </div>
       )}
       
-      {/* Video wrapper for proper zoom */}
-      <div 
-        className="absolute inset-0 overflow-hidden"
-        style={{
-          transform: `scale(${zoom})`,
-          transformOrigin: 'center center',
-          width: `${100 / zoom}%`,
-          height: `${100 / zoom}%`,
-          left: `${50 - 50 / zoom}%`,
-          top: `${50 - 50 / zoom}%`,
-        }}
-      >
-        <video
-          ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ transform: 'scaleX(-1)' }}
-          playsInline
-        />
-        
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ transform: 'scaleX(-1)' }}
-        />
-      </div>
+      {/* Video - real camera zoom, no CSS scaling */}
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ transform: 'scaleX(-1)' }}
+        playsInline
+      />
+      
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ transform: 'scaleX(-1)' }}
+      />
       
       {/* Zoom controls */}
       <div className="absolute bottom-4 right-4 flex flex-col gap-2 z-20">
