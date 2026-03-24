@@ -34,6 +34,15 @@ export const ScheduledWorkout: React.FC<ScheduledWorkoutProps> = ({
     ? (EXERCISE_INSTRUCTIONS[currentExercise.id] || null) 
     : null;
 
+  // Debug logging
+  console.log('ScheduledWorkout render:', {
+    currentIndex,
+    showInstructions,
+    currentExerciseId: currentExercise?.id,
+    hasInstructions: !!instructions,
+    instructionsKeys: Object.keys(EXERCISE_INSTRUCTIONS),
+  });
+
   const totalExercises = exercises.length;
   const isComplete = currentIndex >= totalExercises;
 
@@ -146,11 +155,18 @@ export const ScheduledWorkout: React.FC<ScheduledWorkoutProps> = ({
       </div>
 
       {/* Content - Instructions or Exercise */}
-      {showInstructions && instructions ? (
+      {showInstructions ? (
         /* Instructions View */
         <div className="flex-1 overflow-y-auto p-4 space-y-6">
+          {!instructions && (
+            <div className="bg-yellow-900/20 border border-yellow-800/50 rounded-lg p-4">
+              <p className="text-yellow-400 text-center">
+                {language === 'pl' ? 'Brak szczegółowych instrukcji dla tego ćwiczenia.' : 'No detailed instructions available for this exercise.'}
+              </p>
+            </div>
+          )}
           {/* Video Link */}
-          {instructions.videoUrl && (
+          {instructions?.videoUrl && (
             <div className="bg-red-900/20 border border-red-800/50 rounded-lg p-3">
               <a
                 href={instructions.videoUrl}
@@ -166,68 +182,78 @@ export const ScheduledWorkout: React.FC<ScheduledWorkoutProps> = ({
           )}
 
           {/* Setup */}
-          <div>
-            <h3 className="font-semibold text-green-400 mb-2">{t.setup}</h3>
-            <ul className="space-y-1 text-sm text-gray-300">
-              {(language === 'pl' ? instructions.setup : instructions.setupEn || instructions.setup).map((step, i) => (
-                <li key={i} className="flex gap-2">
-                  <span className="text-green-500">{i + 1}.</span>
-                  {step}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {instructions?.setup && (
+            <div>
+              <h3 className="font-semibold text-green-400 mb-2">{t.setup}</h3>
+              <ul className="space-y-1 text-sm text-gray-300">
+                {(language === 'pl' ? instructions.setup : instructions.setupEn || instructions.setup).map((step, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="text-green-500">{i + 1}.</span>
+                    {step}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Execution */}
-          <div>
-            <h3 className="font-semibold text-blue-400 mb-2">{t.execution}</h3>
-            <ul className="space-y-2 text-sm text-gray-300">
-              {(language === 'pl' ? instructions.execution : instructions.executionEn || instructions.execution).map((step, i) => (
-                <li key={i} className="flex gap-2">
-                  <span className="text-blue-500">{i + 1}.</span>
-                  {step}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {instructions?.execution && (
+            <div>
+              <h3 className="font-semibold text-blue-400 mb-2">{t.execution}</h3>
+              <ul className="space-y-2 text-sm text-gray-300">
+                {(language === 'pl' ? instructions.execution : instructions.executionEn || instructions.execution).map((step, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="text-blue-500">{i + 1}.</span>
+                    {step}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Muscles */}
-          <div>
-            <h3 className="font-semibold text-purple-400 mb-2">{t.muscles}</h3>
-            <div className="flex flex-wrap gap-2">
-              {(language === 'pl' ? instructions.muscles : instructions.musclesEn || instructions.muscles).map((muscle, i) => (
-                <span key={i} className="px-2 py-1 bg-purple-900/50 text-purple-300 rounded text-xs">
-                  {muscle}
-                </span>
-              ))}
+          {instructions?.muscles && (
+            <div>
+              <h3 className="font-semibold text-purple-400 mb-2">{t.muscles}</h3>
+              <div className="flex flex-wrap gap-2">
+                {(language === 'pl' ? instructions.muscles : instructions.musclesEn || instructions.muscles).map((muscle, i) => (
+                  <span key={i} className="px-2 py-1 bg-purple-900/50 text-purple-300 rounded text-xs">
+                    {muscle}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Tips */}
-          <div className="bg-green-900/20 border border-green-800/50 rounded-lg p-3">
-            <h3 className="font-semibold text-green-400 mb-2">{t.tips}</h3>
-            <ul className="space-y-1 text-sm text-gray-300">
-              {(language === 'pl' ? instructions.tips : instructions.tipsEn || instructions.tips).map((tip, i) => (
-                <li key={i} className="flex gap-2">
-                  <span>•</span>
-                  {tip}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {instructions?.tips && (
+            <div className="bg-green-900/20 border border-green-800/50 rounded-lg p-3">
+              <h3 className="font-semibold text-green-400 mb-2">{t.tips}</h3>
+              <ul className="space-y-1 text-sm text-gray-300">
+                {(language === 'pl' ? instructions.tips : instructions.tipsEn || instructions.tips).map((tip, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span>•</span>
+                    {tip}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Common Mistakes */}
-          <div className="bg-red-900/20 border border-red-800/50 rounded-lg p-3">
-            <h3 className="font-semibold text-red-400 mb-2">{t.commonMistakes}</h3>
-            <ul className="space-y-1 text-sm text-gray-300">
-              {(language === 'pl' ? instructions.commonMistakes : instructions.commonMistakesEn || instructions.commonMistakes).map((mistake, i) => (
-                <li key={i} className="flex gap-2">
-                  <span>•</span>
-                  {mistake}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {instructions?.commonMistakes && (
+            <div className="bg-red-900/20 border border-red-800/50 rounded-lg p-3">
+              <h3 className="font-semibold text-red-400 mb-2">{t.commonMistakes}</h3>
+              <ul className="space-y-1 text-sm text-gray-300">
+                {(language === 'pl' ? instructions.commonMistakes : instructions.commonMistakesEn || instructions.commonMistakes).map((mistake, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span>•</span>
+                    {mistake}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Spacer for bottom buttons */}
           <div className="h-20" />
@@ -253,7 +279,7 @@ export const ScheduledWorkout: React.FC<ScheduledWorkoutProps> = ({
             ← {t.previous || 'Poprzednie'}
           </button>
         )}
-        {showInstructions && instructions ? (
+        {showInstructions ? (
           <>
             <button
               onClick={handleSkipInstructions}
