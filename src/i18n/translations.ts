@@ -166,6 +166,7 @@ export interface Translations {
   finish: string;
   noExercisesFound: string;
   back: string;
+  backToExercises: string;
   cancelWorkout: string;
   previous: string;
   skip: string;
@@ -323,6 +324,7 @@ const translations: Record<Language, Translations> = {
     finish: 'Zakończ',
     noExercisesFound: 'Nie znaleziono ćwiczeń',
     back: 'Wróć',
+    backToExercises: 'Wróć do ćwiczeń',
     cancelWorkout: 'Anuluj',
     previous: 'Poprzednie',
     skip: 'Pomiń',
@@ -479,6 +481,7 @@ const translations: Record<Language, Translations> = {
     finish: 'Finish',
     noExercisesFound: 'No exercises found',
     back: 'Back',
+    backToExercises: 'Back to exercises',
     cancelWorkout: 'Cancel',
     previous: 'Previous',
     skip: 'Skip',

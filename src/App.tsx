@@ -5,6 +5,7 @@ import { WeeklySchedule } from './components/Schedule/WeeklySchedule';
 import { ScheduledWorkout } from './components/Schedule/ScheduledWorkout';
 import { UpdateNotification } from './components/UpdateNotification/UpdateNotification';
 import { useServiceWorker, isStandalone } from './hooks/useServiceWorker';
+import { useTranslation } from './i18n';
 import type { DayOfWeek } from './stores/scheduleStore';
 import type { Exercise } from './types/pose';
 import './App.css';
@@ -12,6 +13,7 @@ import './App.css';
 type AppView = 'selector' | 'exercise' | 'schedule' | 'scheduled-workout';
 
 function App() {
+  const { t } = useTranslation();
   const [view, setView] = useState<AppView>('selector');
   const [currentExercise, setCurrentExercise] = useState<Exercise | null>(null);
   const [targetReps, setTargetReps] = useState(10);
@@ -93,7 +95,7 @@ function App() {
               onClick={handleBackToSelector}
               className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors text-sm font-medium"
             >
-              ← Wróć do ćwiczeń
+              ← {t.backToExercises || t.back}
             </button>
           </div>
           <div className="flex-1 overflow-y-auto">

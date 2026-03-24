@@ -50,19 +50,19 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday, onStart
               : `${exercises.length} ${exercises.length === 1 ? t.exercise : t.exercises}`}
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap justify-end">
           {exercises.length > 0 && (
             <>
               <button
                 onClick={() => setShowClearConfirm(true)}
-                className="px-3 py-2 text-red-500 hover:bg-red-900/30 rounded-lg text-sm"
+                className="px-3 py-2 text-red-500 hover:bg-red-900/30 rounded-lg text-sm whitespace-nowrap"
               >
                 {t.clearDay || 'Wyczyść dzień'}
               </button>
               {onStartWorkout && (
                 <button
                   onClick={() => onStartWorkout(day)}
-                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 text-sm font-medium flex items-center gap-2"
+                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 text-sm font-medium flex items-center gap-2 whitespace-nowrap"
                 >
                   ▶ {t.startWorkout || 'Rozpocznij trening'}
                 </button>
@@ -74,7 +74,7 @@ export const DayView: React.FC<DayViewProps> = ({ day, dayName, isToday, onStart
               setEditingExercise(null);
               setShowAddModal(true);
             }}
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-sm font-medium"
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-sm font-medium whitespace-nowrap"
           >
             {t.addExercise || 'Dodaj ćwiczenie'}
           </button>
