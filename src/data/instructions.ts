@@ -476,4 +476,312 @@ export const EXERCISE_INSTRUCTIONS: Record<string, ExerciseInstructions> = {
     ],
     musclesEn: ['Chest', 'Triceps', 'Shoulders', 'Core'],
   },
+
+  'kettle-upright-row': {
+    setup: [
+      'Stań prosto, nogi na szerokość bioder',
+      'Chwyć kettlebell oburącz, ramiona wzdłuż ciała',
+      'Barki opuszczone, łopatki ściągnięte',
+      'Lekko zgięte kolana, napięty core',
+    ],
+    execution: [
+      'Ciągnij kettlebell w górę wzdłuż ciała',
+      'Prowadź łokciami - mają być wyżej niż dłonie',
+      'Podnieś do pozycji, gdy kettlebell jest pod brodą',
+      'Powoli opuszczaj kontrolując ruch',
+    ],
+    commonMistakes: [
+      'Unoszenie barków do uszu (shrug)',
+      'Odchylanie się do tyłu dla równowagi',
+      'Zbyt szerokie prowadzenie - barki się rotują',
+      'Zbyt duży ciężar - niekontrolowany ruch',
+    ],
+    tips: [
+      'Wyobraź sobie, że prowadzisz łokciami do góry',
+      'Trzymaj barki opuszczone przez cały czas',
+      'Jeśli barki bolą - zmniejsz ciężar',
+    ],
+    muscles: ['Barki (część środkowa)', 'Zębaty przedni', 'Czworoboczny (górna część)', 'Dwugłowy (krótka głowa)'],
+    setupEn: [
+      'Stand straight, feet hip-width apart',
+      'Grab kettlebell with both hands, arms at sides',
+      'Shoulders down, shoulder blades retracted',
+      'Slightly bent knees, engaged core',
+    ],
+    executionEn: [
+      'Pull kettlebell up along body',
+      'Lead with elbows - they should be higher than hands',
+      'Lift to position when kettlebell is under chin',
+      'Slowly lower controlling the movement',
+    ],
+    commonMistakesEn: [
+      'Shrugging shoulders to ears',
+      'Leaning back for balance',
+      'Too wide grip - shoulders rotate in',
+      'Too heavy weight - uncontrolled movement',
+    ],
+    tipsEn: [
+      'Imagine leading with elbows upward',
+      'Keep shoulders down throughout',
+      'If shoulders hurt - reduce weight',
+    ],
+    musclesEn: ['Side deltoids', 'Serratus anterior', 'Upper trapezius', 'Biceps (short head)'],
+  },
+
+  'triceps-extension': {
+    setup: [
+      'Stań lub usiądź prosto, napięty core',
+      'Chwyć hantlę (lub kettlebell) oburącz',
+      'Unieś nad głowę, ramiona wyprostowane',
+      'Łokcie skierowane do przodu, blisko głowy',
+    ],
+    execution: [
+      'Zginaj przedramiona w łokciach, opuszczaj ciężar za głowę',
+      'Łokcie pozostają w miejscu (nie rozchylaj)',
+      'Opuszczaj do momentu, gdy przedramiona są równoległe do podłogi',
+      'Wyciśnij z powrotem do góry, zablokuj łokcie',
+    ],
+    commonMistakes: [
+      'Łokcie rozchodzą się na boki',
+      'Garbenie się w plecach dla siły',
+      'Niepełny zakres ruchu (nie opuszczasz do końca)',
+      'Ruch klatką zamiast tylko przedramionami',
+      'Zbyt ciężki ciężar - tracisz kontrolę',
+    ],
+    tips: [
+      'Zacznij od lżejszego ciężaru - technika jest kluczowa',
+      'Wyobraź sobie, że łokcie są "przyklejone" do głowy',
+      'Wersja łatwiejsza: leżąc na ławce/ziemi',
+    ],
+    muscles: ['Triceps (wszystkie głowy)', 'Naramienny (tył)', 'Przedramiona (chwyt)', 'Mięśnie core (stabilizacja)'],
+    setupEn: [
+      'Stand or sit straight, engaged core',
+      'Grab dumbbell (or kettlebell) with both hands',
+      'Lift overhead, arms straight',
+      'Elbows pointing forward, close to head',
+    ],
+    executionEn: [
+      'Bend forearms at elbows, lower weight behind head',
+      'Elbows stay in place (don\'t flare)',
+      'Lower until forearms are parallel to floor',
+      'Press back up, lock elbows',
+    ],
+    commonMistakesEn: [
+      'Elbows flaring out to sides',
+      'Rounding back for power',
+      'Incomplete range of motion (not lowering fully)',
+      'Moving chest instead of just forearms',
+      'Too heavy weight - losing control',
+    ],
+    tipsEn: [
+      'Start with lighter weight - technique is key',
+      'Imagine elbows are "glued" to head',
+      'Easier version: lying on bench/floor',
+    ],
+    musclesEn: ['Triceps (all heads)', 'Posterior deltoid', 'Forearms (grip)', 'Core muscles (stabilization)'],
+  },
+
+  'pullup': {
+    setup: [
+      'Chwyć drążek nachwytem (dłonie skierowane od siebie), nieco szerzej niż barki',
+      'Zawiśnij swobodnie - proste ręce, barki przy uszach',
+      'Nogi wyprostowane lub ugięte w kolanach',
+      'Napięty core, ciało stabilne (nie buja się)',
+    ],
+    execution: [
+      'Zacznij od ściągnięcia łopatek w dół i do siebie',
+      'Ciągnij się w górę prowadząc łokciami w dół',
+      'Broda musi przejść nad drążkiem',
+      'Powoli opuszczaj się do pełnego zwisu (proste ręce)',
+    ],
+    commonMistakes: [
+      'Niepełny zakres ruchu (nie do końca w górę lub w dół)',
+      'Pompowanie biodrami / bujanie się dla siły',
+      'Napięcie barków przy uszach przez cały czas',
+      'Zbyt szeroki chwyt - obciąża barki',
+    ],
+    tips: [
+      'Zacznij od "dead hang" - pełny zwis to start i koniec',
+      'Jeśli nie dasz rady pełnych - rób negatives (powolne opuszczanie)',
+      'Alternatywa: asystowane podciąganie lub ujemne',
+    ],
+    muscles: ['Najszerszy grzbietu', 'Czworoboczny (środkowa część)', 'Równoległoboczny', 'Dwugłowy (krótka głowa)', 'Zginacze przedramion'],
+    setupEn: [
+      'Grab the bar with overhand grip (palms facing away), slightly wider than shoulders',
+      'Hang freely - straight arms, shoulders at ears',
+      'Legs straight or bent at knees',
+      'Engaged core, stable body (no swinging)',
+    ],
+    executionEn: [
+      'Start by pulling shoulder blades down and together',
+      'Pull up leading with elbows down',
+      'Chin must pass over the bar',
+      'Slowly lower to full dead hang (straight arms)',
+    ],
+    commonMistakesEn: [
+      'Incomplete range of motion (not full up or down)',
+      'Kipping / swinging for momentum',
+      'Shoulders shrugged up to ears',
+      'Too wide grip - stresses shoulders',
+    ],
+    tipsEn: [
+      'Start from "dead hang" - full hang is start and end',
+      'If you can\'t do full reps - do negatives (slow lowering)',
+      'Alternative: assisted pull-ups or negatives',
+    ],
+    musclesEn: ['Latissimus dorsi', 'Trapezius (middle part)', 'Rhomboids', 'Biceps (short head)', 'Forearm flexors'],
+  },
+
+  'plank': {
+    setup: [
+      'Połóż się na brzuchu, przedramiona na podłodze',
+      'Łokcie pod barkami (lub nieco przed)',
+      'Palce stóp na podłodze, nogi wyprostowane',
+    ],
+    execution: [
+      'Unieś ciało opierając się na przedramionach i palcach stóp',
+      'Utrzymuj proste linie: głowa-barki-biodra-pięty',
+      'Napięty brzuch - jakbyś miał przytrzymać cios',
+      'Oddychaj głęboko, nie wstrzymuj oddechu',
+    ],
+    commonMistakes: [
+      'Opadanie bioder w dół (sagging)',
+      'Wypinanie tyłka w górę (pike)',
+      'Garbenie się w barkach',
+      'Wstrzymywanie oddechu',
+      'Patrzenie za daleko do przodu lub w dół',
+    ],
+    tips: [
+      'Wyobraź sobie, że ktoś ciągnie cię za głowę i za pięty w przeciwnych kierunkach',
+      'Patrz między ręce - neutralna pozycja szyi',
+      'Jeśli za trudno - opuśź kolana na podłogę',
+    ],
+    muscles: ['Prosty brzucha', 'Mięsień poprzeczny brzucha', 'Erektor spiny', 'Proste mięśnie grzbietu', 'Pośladkowy wielki', 'Czworogłowy uda'],
+    setupEn: [
+      'Lie face down, forearms on the floor',
+      'Elbows under shoulders (or slightly in front)',
+      'Toes on floor, legs straight',
+    ],
+    executionEn: [
+      'Lift body supporting on forearms and toes',
+      'Maintain straight lines: head-shoulders-hips-heels',
+      'Engaged core - as if bracing for a punch',
+      'Breathe deeply, don\'t hold breath',
+    ],
+    commonMistakesEn: [
+      'Hips sagging down',
+      'Butt piked up',
+      'Rounding shoulders',
+      'Holding breath',
+      'Looking too far forward or down',
+    ],
+    tipsEn: [
+      'Imagine someone pulling your head and heels in opposite directions',
+      'Look between hands - neutral neck position',
+      'If too hard - drop knees to floor',
+    ],
+    musclesEn: ['Rectus abdominis', 'Transverse abdominis', 'Erector spinae', 'Quadratus lumborum', 'Gluteus maximus', 'Quadriceps'],
+  },
+
+  'bicep-curl': {
+    setup: [
+      'Stań prosto, nogi na szerokość bioder',
+      'Chwyć hantle (lub kettlebell) dłoniami skierowanymi do przodu',
+      'Ręce wzdłuż ciała, łokcie "przyklejone" do boków',
+      'Napięty core, barki opuszczone',
+    ],
+    execution: [
+      'Zginaj przedramiona w łokciach, kręć ciężar w górę',
+      'Dłonie kręcą się naturalnie (supinacja) - od neutralnej do skierowanej do góry',
+      'W najwyższym punkcie napięcie bicepsa',
+      'Powoli opuszczaj kontrolując ruch (2-3 sekundy)',
+    ],
+    commonMistakes: [
+      'Bujanie tułowiem dla siły (cheating)',
+      'Łokcie odrywają się od boków',
+      'Niepełny zakres ruchu - nie opuszczasz do końca',
+      'Zbyt szybkie opuszczanie (brak kontroli)',
+    ],
+    tips: [
+      'Stań plecami do ściany jeśli masz problem z bujaniem',
+      'Wolniejsza faza opuszczania = więcej napięcia mięśniowego',
+      'Lekkie zgięcie nadgarstków na górze dla extra napięcia',
+    ],
+    muscles: ['Dwugłowy ramienia', 'Mięsień naramienny', 'Zginacze nadgarstka'],
+    setupEn: [
+      'Stand straight, feet hip-width apart',
+      'Grab dumbbells (or kettlebell) with palms facing forward',
+      'Arms at sides, elbows "glued" to sides',
+      'Engaged core, shoulders down',
+    ],
+    executionEn: [
+      'Curl forearms at elbows, rotate weight up',
+      'Hands naturally rotate (supination) - from neutral to facing up',
+      'Squeeze biceps at top',
+      'Slowly lower controlling the movement (2-3 seconds)',
+    ],
+    commonMistakesEn: [
+      'Swinging torso for momentum (cheating)',
+      'Elbows drifting away from sides',
+      'Incomplete range - not lowering fully',
+      'Lowering too fast (no control)',
+    ],
+    tipsEn: [
+      'Stand with back to wall if you struggle with swinging',
+      'Slower lowering phase = more muscle tension',
+      'Slight wrist curl at top for extra squeeze',
+    ],
+    musclesEn: ['Biceps brachii', 'Brachialis', 'Wrist flexors'],
+  },
+
+  'kettle-bicep-curl': {
+    setup: [
+      'Stań prosto, nogi na szerokość bioder',
+      'Chwyć kettlebell (lub dwie) dłoniami skierowanymi do przodu',
+      'Ręce wzdłuż ciała, łokcie "przyklejone" do boków',
+      'Napięty core, barki opuszczone',
+    ],
+    execution: [
+      'Zginaj przedramiona w łokciach, unieś kettlebell w górę',
+      'Łokcie wciąż przy bokach',
+      'W najwyższym punkcie napięcie bicepsa',
+      'Powoli opuszczaj kontrolując ruch',
+    ],
+    commonMistakes: [
+      'Bujanie tułowiem dla siły',
+      'Łokcie odrywają się od boków',
+      'Niepełny zakres ruchu',
+      'Zbyt szybkie opuszczanie',
+    ],
+    tips: [
+      'Kettlebell może być trudniejszy niż hantla - zacznij od lżejszego ciężaru',
+      'Wolniejsze tempo = lepsze rezultaty',
+      'Alternatywnie: chwyt młotkowy (dłonie w stronę ciała)',
+    ],
+    muscles: ['Dwugłowy ramienia', 'Mięsień naramienny', 'Zginacze nadgarstka'],
+    setupEn: [
+      'Stand straight, feet hip-width apart',
+      'Grab kettlebell (or two) with palms facing forward',
+      'Arms at sides, elbows "glued" to sides',
+      'Engaged core, shoulders down',
+    ],
+    executionEn: [
+      'Curl forearms at elbows, lift kettlebell up',
+      'Elbows stay at sides',
+      'Squeeze biceps at top',
+      'Slowly lower controlling the movement',
+    ],
+    commonMistakesEn: [
+      'Swinging torso for momentum',
+      'Elbows drifting away from sides',
+      'Incomplete range of motion',
+      'Lowering too fast',
+    ],
+    tipsEn: [
+      'Kettlebell may be harder than dumbbell - start lighter',
+      'Slower tempo = better results',
+      'Alternative: hammer grip (palms facing body)',
+    ],
+    musclesEn: ['Biceps brachii', 'Brachialis', 'Wrist flexors'],
+  },
 };
