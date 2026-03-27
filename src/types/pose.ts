@@ -51,11 +51,11 @@ export const POSE_LANDMARKS = {
 } as const;
 
 // Exercise types
-export type ExerciseType = 
-  | 'squat' 
-  | 'pushup' 
-  | 'plank' 
-  | 'lunge' 
+export type ExerciseType =
+  | 'squat'
+  | 'pushup'
+  | 'plank'
+  | 'lunge'
   | 'deadlift'
   | 'kettle-goblet-squat'
   | 'kettle-swing'
@@ -68,7 +68,8 @@ export type ExerciseType =
   | 'triceps-extension'
   | 'pullup'
   | 'bicep-curl'
-  | 'kettle-bicep-curl';
+  | 'kettle-bicep-curl'
+  | 'kettle-good-morning';
 
 export interface Exercise {
   id: ExerciseType;

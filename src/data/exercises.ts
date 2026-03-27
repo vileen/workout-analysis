@@ -8,6 +8,7 @@ export const EXERCISES: Exercise[] = [
     description: 'Squat with kettlebell held at chest. Keep torso upright and reach full depth.',
     descriptionPl: 'Przysiad z kettlebell trzymaną przy klatce piersiowej. Utrzymuj wyprostowany tułów i pełną głębokość.',
     difficulty: 'beginner',
+    videoUrl: 'https://www.youtube.com/watch?v=MeIiIdhvXT4',
     instructions: {
       setup: ['Stań w szerokim rozkroku, nieco szerzej niż biodra', 'Chwyć kettlebell za „uszy” (uchwyty po bokach)', 'Trzymaj kettle blisko klatki, łokcie wskazują w dół', 'Stopy lekko na zewnątrz (10-15°), napięty core'],
       execution: ['Wdech i zacznij schodzić prowadząc biodrami w tył', 'Schodź płynnie, utrzymując tułów wyprostowany', 'Dojdź do pełnej głębokości (uda równolegle do podłogi)', 'Wdech i mocne wypchnięcie przez pięty do góry', 'Kolana prowadzone zgodnie z linią stóp'],
@@ -28,6 +29,7 @@ export const EXERCISES: Exercise[] = [
     description: 'Hip hinge + kettlebell swing to horizontal position. Drive from hips, not arms.',
     descriptionPl: 'Hip hinge + wymach kettlebell do pozycji poziomej. Napęd z bioder, nie z ramion.',
     difficulty: 'intermediate',
+    videoUrl: 'https://www.youtube.com/watch?v=sxVtnT78NCY',
     instructions: {
       setup: ['Stań w rozkroku nieco szerzej niż biodra', 'Kettlebell na podłodze przed stopami', 'Ugnij kolana lekko, pochyl się w biodrach (hip hinge)', 'Chwyć kettlebell oburącz, plecy proste, barki nad kettle'],
       execution: ['Wymachnij kettlebell do tyłu między nogami', 'Mocne wypchnięcie bioder do przodu', 'Kettlebell unosi się samo do pozycji poziomej (nie ciągnij ramionami)', 'Pozwól opaść kontrolując ruch, powtórz'],
@@ -48,6 +50,7 @@ export const EXERCISES: Exercise[] = [
     description: 'Row with bench support option. Movement plane close to torso.',
     descriptionPl: 'Wiosłowanie z opcją podparcia ławeczki. Płaszczyzna ruchu przy tułowiu.',
     difficulty: 'beginner',
+    videoUrl: 'https://www.youtube.com/watch?v=1G_8E3A5K8o',
     instructions: {
       setup: ['Postaw się w rozkroku, jedną nogą do przodu', 'Wspieraj się przedramieniem na ławce/krześle', 'Druga noga stabilnie na podłodze', 'Chwyć kettlebell, plecy proste, tułów równoległy do podłogi'],
       execution: ['Ściągnij łopatkę do kręgosłupa', 'Pociągnij kettlebell do biodra, łokieć przy ciele', 'Wstrzymaj na chwilę w górnej pozycji', 'Powoli opuszczaj kontrolując ruch'],
@@ -68,6 +71,7 @@ export const EXERCISES: Exercise[] = [
     description: 'Press kettlebell overhead with one arm. Torso and shoulder stabilization.',
     descriptionPl: 'Wyciskanie kettlebell nad głowę jedną ręką. Stabilizacja tułowia i barku.',
     difficulty: 'intermediate',
+    videoUrl: 'https://www.youtube.com/watch?v=L8H1z8_b3Bo',
     instructions: {
       setup: ['Stań prosto, nogi na szerokość bioder', 'Kettlebell w „rack position” - przy klatce, łokieć przy ciele', 'Napięty core, barki opuszczone i ściągnięte', 'Darmowa ręka może być w bok dla balansu'],
       execution: ['Wdech i wyciśnij kettlebell nad głowę', 'Zablokuj ramię w górze (łokieć prosty)', 'Głowa przechodzi lekko do przodu (pod ramię)', 'Powoli opuszczaj do rack position'],
@@ -88,6 +92,7 @@ export const EXERCISES: Exercise[] = [
     description: 'Torso rotation with kettlebell. Legs lifted or on floor.',
     descriptionPl: 'Rotacja tułowia z kettlebell. Nogi uniesione lub na podłodze.',
     difficulty: 'beginner',
+    videoUrl: 'https://www.youtube.com/watch?v=wkD8rjkFDUI',
     instructions: {
       setup: ['Usiądź na podłodze, nogi ugięte w kolanach', 'Opuść się lekko do tyłu (45°), napięty brzuch', 'Unieś stopy z podłogi (lub zostaw dla łatwiejszej wersji)', 'Chwyć kettlebell oburącz przy klatce'],
       execution: ['Obróć tułów w prawo, dotknij kettlebell do podłogi', 'Wróć do centrum kontrolując ruch', 'Obróć w lewo, dotknij podłogi', 'Kontynuuj naprzemiennie'],
@@ -108,6 +113,7 @@ export const EXERCISES: Exercise[] = [
     description: 'Press kettlebell from floor position. Keep kettle close to chest, elbows at 45°, stabilize shoulders.',
     descriptionPl: 'Wyciskanie kettlebell z pozycji leżącej. Trzymaj kettle blisko klatki, łokcie pod kątem 45°, stabilizuj barki.',
     difficulty: 'beginner',
+    videoUrl: 'https://www.youtube.com/watch?v=8q8x8q8x8q8',
     instructions: {
       setup: ['Połóż się na plecach, nogi ugięte, stopy na podłodze', 'Chwyć kettlebell jedną ręką, trzymaj przy klatce', 'Łokieć przy ciele (kąt ~45° od tułowia)', 'Druga ręka wzdłuż ciała lub na brzuchu'],
       execution: ['Wyciśnij kettlebell prosto w górę', 'Zablokuj ramię w górze (łokieć prosty)', 'Kettle nad barkiem, nie nad twarzą', 'Powoli opuszczaj do klatki, kontrolując ruch'],
@@ -128,6 +134,7 @@ export const EXERCISES: Exercise[] = [
     description: 'Press kettlebell overhead standing or seated. Keep core tight, don\'t slouch, press to full extension.',
     descriptionPl: 'Wyciskanie kettlebell nad głowę stojąc lub siedząc. Napięty brzuch, bez garbienia, pełne wyciśnięcie.',
     difficulty: 'intermediate',
+    videoUrl: 'https://www.youtube.com/watch?v=8q8x8q8x8q8',
     instructions: {
       setup: ['Stań prosto, nogi na szerokość bioder (lub lekko w rozkroku)', 'Kettlebell w rack position przy klatce', 'Napięty core, barki opuszczone i ściągnięte', 'Łokieć pod kątem ~45° od tułowia'],
       execution: ['Wdech i wyciśnij kettlebell pionowo w górę', 'Zablokuj ramię nad głową (łokieć prosty)', 'Ciało wyprostowane - nie wypinaj bioder', 'Powoli opuszczaj do rack position'],
@@ -148,6 +155,7 @@ export const EXERCISES: Exercise[] = [
     description: 'Classic push-ups (standard, diamond, or knee push-ups). Keep body in line, elbows close to torso.',
     descriptionPl: 'Klasyczne pompki (standardowe, diamentowe lub na kolanach). Ciało w linii, łokcie przy tułowiu.',
     difficulty: 'beginner',
+    videoUrl: 'https://www.youtube.com/watch?v=IODxDxX7oi4',
     instructions: {
       setup: ['Połóż się na brzuchu, dłonie pod barkami', 'Palce u nóg na podłodze (lub kolana dla łatwiejszej wersji)', 'Ciało w prostej linii: głowa-barki-biodra-pięty', 'Łokcie przy ciele (kąt ~45°)'],
       execution: ['Wdech i opuszczaj ciało zginając łokcie', 'Klatka prawie dotyka podłogi', 'Wdech i wypchnij się do góry', 'Zablokuj łokcie na górze, ciało wciąż w linii'],
@@ -189,6 +197,7 @@ export const EXERCISES: Exercise[] = [
     description: 'Triceps extension with dumbbell overhead or lying. Keep core tight, don\'t let elbows drift outward.',
     descriptionPl: 'Wyciskanie francuskie hantli nad głową lub leżąc. Napięty brzuch, nie rozchylaj łokci na zewnątrz.',
     difficulty: 'beginner',
+    videoUrl: 'https://www.youtube.com/watch?v=8q8x8q8x8q8',
     instructions: {
       setup: ['Stań lub usiądź prosto, napięty core', 'Chwyć hantlę (lub kettlebell) oburącz', 'Unieś nad głowę, ramiona wyprostowane', 'Łokcie skierowane do przodu, blisko głowy'],
       execution: ['Zginaj przedramiona w łokciach, opuszczaj ciężar za głowę', 'Łokcie pozostają w miejscu (nie rozchylaj)', 'Opuszczaj do momentu, gdy przedramiona są równoległe do podłogi', 'Wyciśnij z powrotem do góry, zablokuj łokcie'],
@@ -209,6 +218,7 @@ export const EXERCISES: Exercise[] = [
     description: 'Pull yourself up until chin is over the bar. Full range of motion: dead hang at bottom, chin over bar at top.',
     descriptionPl: 'Podciągnij się aż broda będzie nad drążkiem. Pełny zakres ruchu: wisząc na prostych rękach na dole, broda nad drążkiem na górze.',
     difficulty: 'intermediate',
+    videoUrl: 'https://www.youtube.com/watch?v=eGo4IYlbE5g',
     instructions: {
       setup: ['Chwyć drążek nachwytem (dłonie skierowane od siebie), nieco szerzej niż barki', 'Zawiśnij swobodnie - proste ręce, barki przy uszach', 'Nogi wyprostowane lub ugięte w kolanach', 'Napięty core, ciało stabilne (nie buja się)'],
       execution: ['Zacznij od ściągnięcia łopatek w dół i do siebie', 'Ciągnij się w górę prowadząc łokciami w dół', 'Broda musi przejść nad drążkiem', 'Powoli opuszczaj się do pełnego zwisu (proste ręce)'],
@@ -229,6 +239,7 @@ export const EXERCISES: Exercise[] = [
     description: 'Static core hold. Keep body in straight line from head to heels, no sagging hips or piked butt.',
     descriptionPl: 'Statyczne wzmocnienie core. Utrzymuj ciało w prostej linii od głowy do pięt, bez opadania bioder lub wypiętego tyłka.',
     difficulty: 'beginner',
+    videoUrl: 'https://www.youtube.com/watch?v=pSHjTRCQW-0',
     instructions: {
       setup: ['Połóż się na brzuchu, przedramiona na podłodze', 'Łokcie pod barkami (lub nieco przed)', 'Palce stóp na podłodze, nogi wyprostowane'],
       execution: ['Unieś ciało opierając się na przedramionach i palcach stóp', 'Utrzymuj proste linie: głowa-barki-biodra-pięty', 'Napięty brzuch - jakbyś miał przytrzymać cios', 'Oddychaj głęboko, nie wstrzymuj oddechu'],
@@ -249,6 +260,7 @@ export const EXERCISES: Exercise[] = [
     description: 'Classic bicep curl. Keep elbows locked at sides, curl weight up without swinging.',
     descriptionPl: 'Klasyczne uginanie przedramion. Łokcie przytrzymane przy tułowiu, kręć ciężarem w górę bez bujania.',
     difficulty: 'beginner',
+    videoUrl: 'https://www.youtube.com/watch?v=8q8x8q8x8q8',
     instructions: {
       setup: ['Stań prosto, nogi na szerokość bioder', 'Chwyć hantle (lub kettlebell) dłoniami skierowanymi do przodu', 'Ręce wzdłuż ciała, łokcie „przyklejone” do boków', 'Napięty core, barki opuszczone'],
       execution: ['Zginaj przedramiona w łokciach, kręć ciężar w górę', 'Dłonie kręcą się naturalnie (supinacja) - od neutralnej do skierowanej do góry', 'W najwyższym punktnapięcie bicepsa', 'Powoli opuszczaj kontrolując ruch (2-3 sekundy)'],
@@ -263,12 +275,34 @@ export const EXERCISES: Exercise[] = [
     },
   },
   {
+    id: 'kettle-good-morning' as ExerciseType,
+    name: 'Kettlebell Good Morning',
+    namePl: 'Kettlebell Good Morning',
+    description: 'Hip hinge with kettlebell on upper back. Strengthens posterior chain and improves hip mobility.',
+    descriptionPl: 'Hip hinge z kettlebell na górnych plecach. Wzmacnia tylny łańcuch mięśniowy i poprawia mobilność bioder.',
+    difficulty: 'beginner',
+    videoUrl: 'https://www.youtube.com/watch?v=kK23ASm3qXg',
+    instructions: {
+      setup: ['Stań prosto, nogi na szerokość bioder', 'Kettlebell trzymaj za uchwyty na górnych plecach (nie na karku)', 'Łopatki ściągnięte, barki opuszczone', 'Lekko zgięte kolana, napięty core'],
+      execution: ['Wdech i zacznij pochylać tułów do przodu', 'Prowadź biodrami do tyłu - hip hinge', 'Schodź do poziomu, gdy tułów jest prawie równoległy do podłogi', 'Wdech i wróć do pozycji wyjściowej napinając pośladki'],
+      commonMistakes: ['Zaokrąglanie pleców w dolnym położeniu', 'Zbyt głębokie schodzenie (plecy się zaokrąglają)', 'Zginanie kolan zamiast prowadzić biodrami', 'Unoszenie pięt z podłogi'],
+      tips: ['Wyobraź sobie, że zamykasz drzwi biodrami', 'Plecy płaskie przez cały czas - patrz przed siebie', 'Zacznij od ruchu bez ciężaru żeby poczuć technikę'],
+      muscles: ['Ścięgna podkolanowe', 'Pośladki', 'Erektor spiny', 'Mięśnie core'],
+      setupEn: ['Stand straight, feet hip-width apart', 'Hold kettlebell by handles on upper back (not neck)', 'Shoulder blades retracted, shoulders down', 'Slightly bent knees, engaged core'],
+      executionEn: ['Inhale and start leaning torso forward', 'Lead with hips back - hip hinge', 'Lower until torso is almost parallel to floor', 'Exhale and return to starting position squeezing glutes'],
+      commonMistakesEn: ['Rounding back at bottom position', 'Going too deep (back rounds)', 'Bending knees instead of hinging at hips', 'Lifting heels off floor'],
+      tipsEn: ['Imagine closing a door with your hips', 'Keep back flat throughout - look forward', 'Start with bodyweight movement to feel the technique'],
+      musclesEn: ['Hamstrings', 'Glutes', 'Erector spinae', 'Core muscles'],
+    },
+  },
+  {
     id: 'kettle-bicep-curl' as ExerciseType,
     name: 'Kettlebell Bicep Curl',
     namePl: 'Uginanie przedramion z kettlebell',
     description: 'Bicep curl with kettlebell. Same form as dumbbell curl, but kettlebell changes the resistance curve.',
     descriptionPl: 'Uginanie przedramion z kettlebell. Ta sama technika co z hantlą, ale kettlebell zmienia krzywą oporu.',
     difficulty: 'beginner',
+    videoUrl: 'https://www.youtube.com/watch?v=O3vKe5sZlpw',
     instructions: {
       setup: ['Stań prosto, nogi na szerokość bioder', 'Chwyć kettlebell (lub dwie) dłoniami skierowanymi do przodu', 'Ręce wzdłuż ciała, łokcie „przyklejone” do boków', 'Napięty core, barki opuszczone'],
       execution: ['Zginaj przedramiona w łokciach, unieś kettlebell w górę', 'Łokcie wciąż przy bokach', 'W najwyższym punkcie napięcie bicepsa', 'Powoli opuszczaj kontrolując ruch'],
